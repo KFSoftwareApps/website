@@ -134,13 +134,22 @@ export default function SocialShareModal({
                                         ) : (
                                             <div className="flex gap-2 w-full">
                                                 <button
-                                                    onClick={() => {
-                                                        const link = document.createElement('a');
-                                                        link.href = post.image;
-                                                        link.download = `instagram-share-${post.title.substring(0, 10)}.jpg`;
-                                                        document.body.appendChild(link);
-                                                        link.click();
-                                                        document.body.removeChild(link);
+                                                    onClick={async () => {
+                                                        try {
+                                                            const response = await fetch(post.image);
+                                                            const blob = await response.blob();
+                                                            const url = window.URL.createObjectURL(blob);
+                                                            const link = document.createElement('a');
+                                                            link.href = url;
+                                                            link.download = `instagram-share-${post.title.substring(0, 10).replace(/\s+/g, '-')}.jpg`;
+                                                            document.body.appendChild(link);
+                                                            link.click();
+                                                            document.body.removeChild(link);
+                                                            window.URL.revokeObjectURL(url);
+                                                        } catch (error) {
+                                                            console.error("Görsel indirilemedi:", error);
+                                                            alert("Görsel indirilirken bir sorun oluştu.");
+                                                        }
                                                     }}
                                                     className="flex items-center justify-center gap-2 flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors"
                                                 >
