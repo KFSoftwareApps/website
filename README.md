@@ -65,7 +65,7 @@ The output will be generated in the `out/` directory, ready for FTP/Deployment.
 - [ ] PWA (Progressive Web App) enhancements
 
 ## 🛡️ License
-Copyright © 2024 KF Software. All rights reserved.
+Copyright © 2025 KF Software. All rights reserved.
 
 ---
 *Built with ❤️ by KF Software Engineering Team.*

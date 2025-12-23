@@ -197,7 +197,7 @@ export default function Navbar() {
 
             <div className="px-8 pb-12 pt-6 border-t border-gray-50 text-center">
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-4">
-                KFSOFTWARE © 2024
+                KFSOFTWARE © {new Date().getFullYear()}
               </p>
               <div className="flex justify-center gap-4">
                 <Link
