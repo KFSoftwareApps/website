@@ -136,8 +136,26 @@ export default function SocialShareModal({
                                                 <button
                                                     onClick={async () => {
                                                         try {
-                                                            const response = await fetch(post.image);
+                                                            const response = await fetch(post.image, { mode: 'cors' });
+
+                                                            if (!response.ok) {
+                                                                throw new Error(`İndirme başarısız (HTTP ${response.status})`);
+                                                            }
+
+                                                            const contentType = response.headers.get('content-type');
+                                                            if (contentType && !contentType.startsWith('image/')) {
+                                                                // If it's not an image (e.g. XML error or HTML 404), throw
+                                                                throw new Error(`Geçersiz dosya formatı: ${contentType}`);
+                                                            }
+
                                                             const blob = await response.blob();
+                                                            if (blob.size < 1024) {
+                                                                // 1KB check just to be safe, matches Instagram's complaint
+                                                                console.warn("Dosya çok küçük, muhtemelen hata: ", blob.size);
+                                                                // We can let it pass or warn? Let's throw to be safe if it is suspiciously small for a blog post image
+                                                                // But a very small icon might be legitimate. Let's trust status and content-type more.
+                                                            }
+
                                                             const url = window.URL.createObjectURL(blob);
                                                             const link = document.createElement('a');
                                                             link.href = url;
@@ -146,9 +164,9 @@ export default function SocialShareModal({
                                                             link.click();
                                                             document.body.removeChild(link);
                                                             window.URL.revokeObjectURL(url);
-                                                        } catch (error) {
+                                                        } catch (error: any) {
                                                             console.error("Görsel indirilemedi:", error);
-                                                            alert("Görsel indirilirken bir sorun oluştu.");
+                                                            alert(`Görsel indirilemedi: ${error.message || "Bilinmeyen hata"}`);
                                                         }
                                                     }}
                                                     className="flex items-center justify-center gap-2 flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors"
