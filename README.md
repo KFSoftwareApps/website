@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KF Software Corporate Website
 
-## Getting Started
+A professional, high-performance landing page and content management platform built for KF Software's mobile application ecosystem (PuantajX, FişMatik).
 
-First, run the development server:
+![KF Software Dashboard](public/og-image.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Vision
+KF Software is dedicated to building efficient tools for field crews and personal finance. This repository houses the unified corporate presence, serving as a hub for product information, support, and specialized content.
+
+## ✨ Core Features
+- **🌍 Multi-Language (i18n):** Full support for Turkish and English with a seamless switcher.
+- **📰 Advanced Blog System:** SSG-powered blog with search, categories, and scheduled publishing.
+- **🛠️ Admin Dashboard:** Custom-built management interface for blog posts, support tickets, and subscriber lists.
+- **🔗 Social Sharing & Link Shortener:** Integrated short link system (`/b/[code]`) with automated formatting for Twitter and Instagram.
+- **📊 Business Intelligence:** Integrated Gaz4 analytics and custom admin statistics.
+- **🛡️ Support System:** Multi-channel support desk with automated email templates.
+- **📱 Responsive & Animated:** Built with mobile-first principles and smooth Framer Motion animations.
+
+## 🛠️ Technology Stack
+- **Framework:** Next.js 15+ (App Router)
+- **Styling:** Tailwind CSS 4
+- **Database:** Supabase (PostgreSQL)
+- **Authenticaton:** Supabase Auth
+- **Mail System:** Hybrid Serverless PHP + Nodemailer
+- **Animations:** Framer Motion
+- **Static Export:** Fully compatible with `output: export` for high-performance hosting.
+
+## 📦 Project Structure
+```text
+├── app/                  # Next.js App Router (Routes & Pages)
+│   ├── admin/            # Protected Management Dashboard
+│   ├── b/[code]/         # Short Link Redirection Logic
+│   ├── blog/             # SSG Blog Engine
+│   └── apps/             # Product Landing Pages
+├── components/           # Reusable UI Design System
+├── lib/                  # Utilities, i18n & Database Helpers
+├── public/               # Optimized Static Assets
+└── scripts/              # Build-time Automation Tools
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Development & Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Local Development
+```bash
+npm run dev
+```
 
-## Learn More
+### Production Build (Static Export)
+```bash
+npm run build
+```
+The output will be generated in the `out/` directory, ready for FTP/Deployment.
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 Roadmap
+- [x] Multi-language support (TR/EN)
+- [x] Short link system integration
+- [x] Admin panel advanced statistics
+- [x] FişMatik pricing engine
+- [ ] Dark Mode integration (Planned Phase 2)
+- [ ] PWA (Progressive Web App) enhancements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛡️ License
+Copyright © 2024 KF Software. All rights reserved.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with ❤️ by KF Software Engineering Team.*
