@@ -19,7 +19,8 @@ export async function generateStaticParams() {
   const { data: posts } = await supabase
     .from("posts")
     .select("slug")
-    .eq("is_published", true);
+    .eq("is_published", true)
+    .lte("published_at", new Date(Date.now() + 60000).toISOString()); // Allow 1 min buffer for safety
 
   if (!posts) return [];
 
@@ -69,6 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     .select("*")
     .eq("slug", slug)
     .eq("is_published", true)
+    .lte("published_at", new Date(Date.now() + 60000).toISOString()) // Allow 1 min buffer for safety
     .single();
 
   if (!post) {
@@ -80,6 +82,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     .from("posts")
     .select("*")
     .eq("is_published", true)
+    .lte("published_at", new Date().toISOString())
     .neq("slug", slug)
     .eq("category", post.category) // Try same category first
     .limit(3);
@@ -92,6 +95,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       .from("posts")
       .select("*")
       .eq("is_published", true)
+      .lte("published_at", new Date().toISOString())
       .neq("slug", slug)
       .not("id", "in", `(${finalRelatedPosts.map((p) => p.id).join(",")})`) // Exclude already found
       .limit(3 - finalRelatedPosts.length);
@@ -106,7 +110,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
-    date: new Date(p.created_at).toLocaleDateString("tr-TR", {
+    date: new Date(p.published_at || p.created_at).toLocaleDateString("tr-TR", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -120,7 +124,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const formattedPost = {
     title: post.title,
     content: post.content,
-    date: new Date(post.created_at).toLocaleDateString("tr-TR", {
+    date: new Date(post.published_at || post.created_at).toLocaleDateString("tr-TR", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -130,6 +134,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     image: post.image_url || "/apps/puantajx/logo.png",
     tags: post.tags || [],
     rawDate: post.created_at,
+    shortCode: post.short_code,
   };
 
   return <BlogPostUI post={formattedPost} relatedPosts={formattedRelatedPosts} />;

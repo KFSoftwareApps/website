@@ -19,12 +19,14 @@ import {
   X,
   ZoomIn,
   HelpCircle,
+  Lock,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/components/ui/Button";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import { useTranslation } from "@/lib/i18n";
+import PricingTable from "./PricingTable";
 
 interface ProductLayoutProps {
   content: AppContent;
@@ -154,30 +156,56 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
             className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
             {content.storeLinks?.web && (
-              <a
-                href={content.storeLinks.web}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto h-14 px-8 rounded-2xl font-bold border-gray-200 hover:bg-gray-50 shadow-sm gap-2"
+              (content.id === "puantajx" || content.id === "fismatik") ? (
+                <div
+                  className="relative w-full sm:w-auto group cursor-not-allowed"
+                  onClick={() => alert(`${content.name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`)}
                 >
-                  <Monitor className="h-5 w-5" /> {t("common.webApp")}
-                </Button>
-              </a>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto h-14 px-8 rounded-2xl font-bold border-gray-200 shadow-sm gap-2 opacity-60 grayscale cursor-not-allowed pointer-events-none"
+                  >
+                    <Monitor className="h-5 w-5" /> {t("common.webApp")}
+                  </Button>
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/10 rounded-2xl">
+                    <div className="bg-black/80 p-2 rounded-full text-white shadow-sm border border-white/10 backdrop-blur-md">
+                      <Lock className="h-4 w-4" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <a
+                  href={content.storeLinks.web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto h-14 px-8 rounded-2xl font-bold border-gray-200 hover:bg-gray-50 shadow-sm gap-2"
+                  >
+                    <Monitor className="h-5 w-5" /> {t("common.webApp")}
+                  </Button>
+                </a>
+              )
             )}
 
-            <Button
-              size="lg"
-              onClick={() => setShowDownloadModal(true)}
-              className={`${brandBg} text-white hover:opacity-90 shadow-2xl shadow-blue-500/20 w-full sm:w-auto px-10 h-14 rounded-2xl font-black text-lg gap-3`}
-            >
-              <Download className="h-6 w-6" />
-              {t("product.downloadBeta")}
-            </Button>
+            <div className="relative w-full sm:w-auto group cursor-pointer" onClick={() => alert("Mobil uygulamalarımız çok yakında App Store ve Google Play'de! 🚀")}>
+              <Button
+                size="lg"
+                className={`${brandBg} text-white hover:opacity-90 shadow-2xl shadow-blue-500/20 w-full sm:w-auto px-10 h-14 rounded-2xl font-black text-lg gap-3 opacity-75 grayscale cursor-pointer pointer-events-none`}
+              >
+                <Download className="h-6 w-6" />
+                {t("product.downloadBeta")}
+              </Button>
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl group-hover:bg-black/5 transition-colors">
+                <div className="bg-black/20 p-2 rounded-full text-white/90 shadow-sm border border-white/20 backdrop-blur-md relative top-0 group-hover:scale-110 transition-transform">
+                  <Lock className="h-5 w-5" />
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -426,6 +454,9 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
           </div>
         </div>
       </div>
+
+      {/* Pricing Table Section - FişMatik Specific */}
+      {content.id === "fismatik" && <PricingTable />}
 
       {/* FAQ Section */}
       {content.faqs && content.faqs.length > 0 && (

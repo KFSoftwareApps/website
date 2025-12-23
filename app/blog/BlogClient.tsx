@@ -23,14 +23,15 @@ export default function BlogClient() {
           .from("posts")
           .select("*")
           .eq("is_published", true)
-          .order("created_at", { ascending: false });
+          .lte("published_at", new Date().toISOString())
+          .order("published_at", { ascending: false });
 
         if (data && data.length > 0) {
           const mappedPosts = data.map((post: any) => ({
             slug: post.slug,
             title: post.title,
             excerpt: post.excerpt || "",
-            date: new Date(post.created_at).toLocaleDateString(
+            date: new Date(post.published_at || post.created_at).toLocaleDateString(
               locale === "tr" ? "tr-TR" : "en-US",
               { day: "numeric", month: "long", year: "numeric" }
             ),

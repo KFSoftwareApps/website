@@ -30,6 +30,8 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
   const [imageUrl, setImageUrl] = useState("");
   const [tags, setTags] = useState(""); // Comma separated string
   const [isPublished, setIsPublished] = useState(false);
+  const [publishedAt, setPublishedAt] = useState("");
+  const [shortCode, setShortCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const router = useRouter();
@@ -52,6 +54,14 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
       setCategory(data.category);
       setImageUrl(data.image_url);
       setIsPublished(data.is_published);
+      if (data.published_at) {
+        // Format for datetime-local: yyyy-MM-ddThh:mm (Local Time)
+        const date = new Date(data.published_at);
+        const offset = date.getTimezoneOffset() * 60000;
+        const localISOTime = new Date(date.getTime() - offset).toISOString().slice(0, 16);
+        setPublishedAt(localISOTime);
+      }
+      setShortCode(data.short_code || "");
       if (data.tags && Array.isArray(data.tags)) {
         setTags(data.tags.join(", "));
       }
@@ -68,6 +78,9 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
+    // Generate short code if missing
+    const finalShortCode = shortCode || Math.random().toString(36).substring(2, 8);
+
     const postData = {
       title,
       slug,
@@ -76,7 +89,9 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
       category,
       image_url: imageUrl,
       is_published: isPublished,
+      published_at: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
       tags: tagsArray,
+      short_code: finalShortCode,
     };
 
     let error;
@@ -293,6 +308,35 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
                     Yayına Al
                   </span>
                 </label>
+              </div>
+
+              <div className="pt-4 border-t border-gray-100 mt-4">
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                  Kısa Kod (Paylaşım İçin)
+                </label>
+                <input
+                  type="text"
+                  value={shortCode}
+                  onChange={(e) => setShortCode(e.target.value)}
+                  placeholder="Otomatik oluşturulur..."
+                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 text-sm font-mono"
+                />
+              </div>
+
+              <div className="pt-4 border-t border-gray-100">
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                  Yayınlanma Tarihi
+                </label>
+                <input
+                  type="datetime-local"
+                  value={publishedAt}
+                  onChange={(e) => setPublishedAt(e.target.value)}
+                  disabled={isPublished}
+                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+                <p className="mt-2 text-[10px] text-gray-400 leading-tight">
+                  Gelecek bir tarih seçerseniz, yazı o tarihe kadar ziyaretçilere görünmeyecektir.
+                </p>
               </div>
             </div>
           </div>

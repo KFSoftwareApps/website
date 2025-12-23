@@ -19,6 +19,7 @@ interface BlogPostUIProps {
         image?: string;
         tags?: string[];
         rawDate?: string;
+        shortCode?: string;
     };
     relatedPosts?: any[];
 }
@@ -45,7 +46,9 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                     title: post.title,
                     excerpt: cleanExcerpt,
                     image: post.image || "",
-                    url: typeof window !== "undefined" ? window.location.href : `https://kfsoftware.app/blog`,
+                    url: post.shortCode
+                        ? `https://kfsoftware.app/b/${post.shortCode}`
+                        : (typeof window !== "undefined" ? window.location.href : `https://kfsoftware.app/blog`),
                     tags: post.tags || []
                 }}
             />

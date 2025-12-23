@@ -90,7 +90,7 @@ function TermsContent() {
                   </div>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" /> Günlük 3 fiş tarama
+                      <Check className="w-4 h-4 text-green-500" /> Günlük 1 fiş tarama
                     </li>
                     <li className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" /> Aylık 20 manuel giriş
@@ -113,7 +113,7 @@ function TermsContent() {
                   </div>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" /> Günlük 30 fiş tarama
+                      <Check className="w-4 h-4 text-green-500" /> Günlük 10 fiş tarama
                     </li>
                     <li className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" /> Aylık 50 manuel giriş
@@ -140,7 +140,7 @@ function TermsContent() {
                   </div>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" /> Günlük 100 fiş tarama
+                      <Check className="w-4 h-4 text-green-500" /> Günlük 25 fiş tarama
                     </li>
                     <li className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" /> Aylık 100 manuel giriş
@@ -163,7 +163,7 @@ function TermsContent() {
                   </div>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" /> Günlük 100 fiş tarama (Toplam)
+                      <Check className="w-4 h-4 text-green-500" /> Günlük 35 fiş tarama (Toplam)
                     </li>
                     <li className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" /> Aylık 200 manuel giriş (Toplam)

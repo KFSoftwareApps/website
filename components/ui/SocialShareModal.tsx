@@ -27,9 +27,9 @@ export default function SocialShareModal({
     const [copied, setCopied] = useState(false);
 
     // Generate content based on platform
-    const twitterContent = `${post.title}\n\n${post.excerpt.substring(0, 150)}...\n\n🔗 ${post.url}\n\n${post.tags.map(t => `#${t}`).join(" ")}`;
+    const twitterContent = `${post.title}\n\n${post.excerpt.substring(0, 150)}...\n\n🔗 ${post.url}\n\n${post.tags.map(t => `#${t.trim()}`).join(" ")}`;
 
-    const instagramContent = `🔥 YENİ YAZI: ${post.title}\n\n${post.excerpt}\n\n👇 Okumak için profildeki linke tıkla!\n\n#KFSoftware #Blog #Teknoloji ${post.tags.map(t => `#${t}`).join(" ")}`;
+    const instagramContent = `🔥 YENİ YAZI: ${post.title}\n\n${post.excerpt}\n\n🔗 Okumak için: ${post.url}\n\n#KFSoftware #Blog #Teknoloji ${post.tags.map(t => `#${t.trim()}`).join(" ")}`;
 
     const content = platform === "twitter" ? twitterContent : instagramContent;
 

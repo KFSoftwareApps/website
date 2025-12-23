@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { AdminSidebar } from "@/components/admin/AdminSidebar";
 export default function AdminSupportPage() {
   const [tickets, setTickets] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -259,66 +259,8 @@ export default function AdminSupportPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex">
       {/* Sidebar */}
-      <aside className="w-72 bg-white border-r border-gray-200 p-6 flex flex-col">
-        <Link href="/admin/dashboard" className="flex items-center gap-3 mb-10 group">
-          <ChevronLeft className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
-          <span className="text-sm font-bold text-gray-600 group-hover:text-blue-600 transition-colors">
-            Dashboard'a Dön
-          </span>
-        </Link>
-
-        <h2 className="text-2xl font-black text-gray-900 mb-8">Destek Talepleri</h2>
-
-        <nav className="space-y-2 flex-1">
-          <button
-            onClick={() => setFilter("open")}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all font-bold ${filter === "open" ? "bg-blue-600 text-white shadow-lg" : "text-gray-600 hover:bg-gray-100"}`}
-          >
-            <div className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5" />
-              <span>Açık</span>
-            </div>
-            <span
-              className={`px-3 py-1 rounded-xl text-sm ${filter === "open" ? "bg-white/20" : "bg-gray-200 text-gray-700"}`}
-            >
-              {tickets.filter((t) => t.status !== "closed").length}
-            </span>
-          </button>
-          <button
-            onClick={() => setFilter("all")}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all font-bold ${filter === "all" ? "bg-blue-600 text-white shadow-lg" : "text-gray-600 hover:bg-gray-100"}`}
-          >
-            <span>Tümü</span>
-            <span
-              className={`px-3 py-1 rounded-xl text-sm ${filter === "all" ? "bg-white/20" : "bg-gray-200 text-gray-700"}`}
-            >
-              {tickets.length}
-            </span>
-          </button>
-          <button
-            onClick={() => setFilter("closed")}
-            className={`w-full flex items-center justify-between p-4 rounded-2xl transition-all font-bold ${filter === "closed" ? "bg-blue-600 text-white shadow-lg" : "text-gray-600 hover:bg-gray-100"}`}
-          >
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5" />
-              <span>Çözülenler</span>
-            </div>
-            <span
-              className={`px-3 py-1 rounded-xl text-sm ${filter === "closed" ? "bg-white/20" : "bg-gray-200 text-gray-700"}`}
-            >
-              {tickets.filter((t) => t.status === "closed").length}
-            </span>
-          </button>
-        </nav>
-
-        <button
-          onClick={handleSignOut}
-          className="mt-auto flex items-center gap-3 p-4 rounded-2xl hover:bg-red-50 text-red-600 font-bold transition-colors"
-        >
-          <XCircle className="h-5 w-5" />
-          Çıkış Yap
-        </button>
-      </aside>
+      {/* Sidebar */}
+      <AdminSidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-8 overflow-y-auto">
@@ -332,6 +274,53 @@ export default function AdminSupportPage() {
                 : "Tüm destek talepleri listeleniyor."}
           </p>
         </header>
+
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-2 mb-8 bg-gray-100/50 p-2 rounded-2xl w-fit">
+          <button
+            onClick={() => setFilter("open")}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${filter === "open"
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50"
+              }`}
+          >
+            <AlertCircle className="h-4 w-4" />
+            Açık Talepler
+            <span className={`ml-2 px-2 py-0.5 rounded-lg text-xs ${filter === "open" ? "bg-blue-50" : "bg-gray-200"}`}>
+              {tickets.filter((t) => t.status !== "closed").length}
+            </span>
+          </button>
+
+          <button
+            onClick={() => setFilter("closed")}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${filter === "closed"
+                ? "bg-white text-green-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50"
+              }`}
+          >
+            <CheckCircle2 className="h-4 w-4" />
+            Çözülenler
+            <span className={`ml-2 px-2 py-0.5 rounded-lg text-xs ${filter === "closed" ? "bg-green-50" : "bg-gray-200"}`}>
+              {tickets.filter((t) => t.status === "closed").length}
+            </span>
+          </button>
+
+          <div className="w-px h-6 bg-gray-300 mx-1"></div>
+
+          <button
+            onClick={() => setFilter("all")}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all ${filter === "all"
+                ? "bg-white text-gray-900 shadow-sm"
+                : "text-gray-500 hover:text-gray-700 hover:bg-gray-200/50"
+              }`}
+          >
+            <Filter className="h-4 w-4" />
+            Tümü
+            <span className={`ml-2 px-2 py-0.5 rounded-lg text-xs ${filter === "all" ? "bg-gray-100" : "bg-gray-200"}`}>
+              {tickets.length}
+            </span>
+          </button>
+        </div>
 
         {/* Tickets List */}
         <div className="space-y-6">

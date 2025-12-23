@@ -61,7 +61,9 @@
     "anyQuestions": "Any Questions?",
     "anyQuestionsDesc": "You can reach us anytime for technical support or to send your suggestions.",
     "createSupportTicket": "Create Support Ticket",
-    "update": "Update"
+    "update": "Update",
+    "pricing": "Pricing",
+    "comparePlans": "Compare Plans"
   },
   "about": {
     "whoWeAre": "Who are we?",

@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
 export default function AdminBlogList() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -53,40 +54,9 @@ export default function AdminBlogList() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Reuse Sidebar / Layout could be extracted but keeping it simple for now */}
-      <aside className="w-64 bg-white border-r border-gray-100 flex flex-col fixed h-full">
-        <div className="p-6 border-b border-gray-50">
-          <Link
-            href="/admin/dashboard"
-            className="flex items-center gap-2 text-gray-400 hover:text-blue-600 transition-colors mb-4 text-sm font-bold"
-          >
-            <ChevronLeft className="h-4 w-4" /> Dashboard'a Dön
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-2 rounded-xl">
-              <FileText className="h-5 w-5 text-white" />
-            </div>
-            <span className="font-black text-gray-900 tracking-tight">BLOG YÖNETİMİ</span>
-          </div>
-        </div>
-        <nav className="flex-1 p-4 space-y-2">
-          <Link
-            href="/admin/blog"
-            className="flex items-center gap-3 p-3 bg-blue-50 text-blue-600 rounded-2xl font-bold"
-          >
-            <FileText className="h-5 w-5" />
-            Tüm Yazılar
-          </Link>
-          <Link
-            href="/admin/blog/new"
-            className="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-2xl transition-all"
-          >
-            <Plus className="h-5 w-5" />
-            Yeni Ekle
-          </Link>
-        </nav>
-      </aside>
+      <AdminSidebar />
 
-      <main className="flex-1 ml-64 p-8">
+      <main className="flex-1 p-8">
         <header className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-black text-gray-900">Blog Yazıları</h1>
@@ -162,18 +132,34 @@ export default function AdminBlogList() {
                         </td>
                         <td className="px-8 py-4">
                           <div className="flex items-center gap-2">
-                            <div
-                              className={`h-2 w-2 rounded-full ${post.is_published ? "bg-green-500" : "bg-orange-500"}`}
-                            ></div>
-                            <span
-                              className={`text-xs font-bold ${post.is_published ? "text-green-600" : "text-orange-600"}`}
-                            >
-                              {post.is_published ? "Yayında" : "Taslak"}
-                            </span>
+                            {post.is_published ? (
+                              new Date(post.published_at) > new Date() ? (
+                                <>
+                                  <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                                  <span className="text-xs font-bold text-blue-600">Planlandı</span>
+                                </>
+                              ) : (
+                                <>
+                                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                                  <span className="text-xs font-bold text-green-600">Yayında</span>
+                                </>
+                              )
+                            ) : (
+                              <>
+                                <div className="h-2 w-2 rounded-full bg-orange-500"></div>
+                                <span className="text-xs font-bold text-orange-600">Taslak</span>
+                              </>
+                            )}
                           </div>
                         </td>
                         <td className="px-8 py-4 text-xs text-gray-500 font-medium">
-                          {new Date(post.created_at).toLocaleDateString("tr-TR")}
+                          {new Date(post.published_at || post.created_at).toLocaleDateString("tr-TR", {
+                            day: "numeric",
+                            month: "numeric",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                         </td>
                         <td className="px-8 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">

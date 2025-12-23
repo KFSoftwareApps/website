@@ -51,7 +51,9 @@
     "anyQuestions": "Herhangi Bir Sorunuz Mu Var?",
     "anyQuestionsDesc": "Uygulama ile ilgili teknik destek almak veya önerilerinizi iletmek için bize dilediğiniz zaman ulaşabilirsiniz.",
     "createSupportTicket": "Destek Talebi Oluştur",
-    "update": "Güncelleme"
+    "update": "Güncelleme",
+    "pricing": "Fiyatlandırma",
+    "comparePlans": "Planları Karşılaştırın"
   },
   "about": {
     "whoWeAre": "Biz Kimiz?",

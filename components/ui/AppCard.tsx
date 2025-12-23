@@ -131,23 +131,25 @@ export function AppCard({
           </button>
         </div>
 
-        {/* Web App Button */}
         {webUrl && (
-          <motion.a
-            whileTap={{ scale: 0.98 }}
-            href={webUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full"
-          >
+          <div className="relative w-full group">
             <Button
               variant="outline"
               size="sm"
-              className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 h-11 rounded-2xl uppercase tracking-tighter"
+              onClick={(e) => {
+                e.preventDefault();
+                alert(`${name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`);
+              }}
+              className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 h-11 rounded-2xl uppercase tracking-tighter opacity-60 grayscale cursor-not-allowed"
             >
               💻 Web Version
             </Button>
-          </motion.a>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="bg-black/80 p-1.5 rounded-full text-white shadow-sm border border-white/10 backdrop-blur-md">
+                <Lock className="h-3 w-3" />
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Review Button */}
