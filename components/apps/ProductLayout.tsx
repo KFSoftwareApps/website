@@ -156,7 +156,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
             className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
             {content.storeLinks?.web && (
-              (content.id === "puantajx" || content.id === "fismatik") ? (
+              content.id === "puantajx" ? (
                 <div
                   className="relative w-full sm:w-auto group cursor-not-allowed"
                   onClick={() => alert(`${content.name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`)}
