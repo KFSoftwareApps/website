@@ -5,7 +5,7 @@ export type FAQItem = {
 
 export type AppContent = {
   id: string;
-  name: string;
+  name: { tr: string; en: string };
   tagline: { tr: string; en: string };
   description: { tr: string; en: string };
   highlights: { tr: string; en: string }[];
@@ -36,7 +36,7 @@ export type AppContent = {
 export const appsContent: Record<string, AppContent> = {
   puantajx: {
     id: "puantajx",
-    name: "PuantajX",
+    name: { tr: "PuantajX", en: "PuantajX" },
     tagline: {
       tr: "Şantiye ve proje ekiplerini tek yerden yönetin.",
       en: "Manage construction and project teams in one place.",
@@ -181,7 +181,7 @@ export const appsContent: Record<string, AppContent> = {
   },
   fismatik: {
     id: "fismatik",
-    name: "FişMatik",
+    name: { tr: "FişMatik: Bütçe Takibi", en: "FisMatik: Budget Tracker" },
     tagline: {
       tr: "Harcamalarını hızlıca kaydet, bütçeni kontrol altında tut.",
       en: "Quickly record your expenses, keep your budget under control.",

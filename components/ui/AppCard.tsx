@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { useTranslation } from "@/lib/i18n";
 
 interface AppCardProps {
-  name: string;
+  name: { tr: string; en: string };
   tagline: { tr: string; en: string };
   href: string;
   iconPath: string;
@@ -48,7 +48,7 @@ export function AppCard({
           >
             <Image
               src={iconPath}
-              alt={`${name} icon`}
+              alt={`${name[locale]} icon`}
               className="h-full w-full object-cover scale-110"
               width={80}
               height={80}
@@ -58,7 +58,7 @@ export function AppCard({
             <h3 className="font-black text-2xl text-gray-900 leading-7 mb-1 group-hover:text-blue-600 transition-colors">
               <Link href={href}>
                 <span className="absolute inset-0" />
-                {name}
+                {name[locale]}
               </Link>
             </h3>
             {/* Mini Chips */}
@@ -132,7 +132,7 @@ export function AppCard({
         </div>
 
         {webUrl && (
-          name === "FişMatik" ? (
+          name.tr.includes("FişMatik") ? (
             <a
               href={webUrl}
               target="_blank"
@@ -155,7 +155,7 @@ export function AppCard({
                 size="sm"
                 onClick={(e) => {
                   e.preventDefault();
-                  alert(`${name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`);
+                  alert(`${name[locale]} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`);
                 }}
                 className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 h-11 rounded-2xl uppercase tracking-tighter opacity-60 grayscale cursor-not-allowed"
               >

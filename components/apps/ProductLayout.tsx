@@ -90,7 +90,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
           >
             <Image
               src={`/apps/${content.id}/logo.png`}
-              alt={`${content.name} Icon`}
+              alt={`${content.name[locale]} Icon`}
               fill
               className={`object-cover ${content.logoScale || ""}`}
             />
@@ -102,7 +102,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
             transition={{ delay: 0.1 }}
             className="text-4xl font-black tracking-tight text-gray-900 sm:text-7xl mb-4"
           >
-            {content.name}
+            {content.name[locale]}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
               content.id === "puantajx" ? (
                 <div
                   className="relative w-full sm:w-auto group cursor-not-allowed"
-                  onClick={() => alert(`${content.name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`)}
+                  onClick={() => alert(`${content.name[locale]} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`)}
                 >
                   <Button
                     variant="outline"
@@ -255,7 +255,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
                 <div className="relative w-full aspect-[9/19.5] group/img transition-transform duration-500 hover:scale-[1.02]">
                   <DeviceFrame
                     src={src}
-                    alt={`${content.name} Screenshot ${index + 1}`}
+                    alt={`${content.name[locale]} Screenshot ${index + 1}`}
                     className="w-full h-full"
                   />
                   {/* Overlay for Zoom Icon */}
@@ -341,7 +341,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
                   {t("product.downloadApp")}
                 </h3>
                 <p className="text-gray-600">
-                  {t("product.downloadDesc").replace("{name}", content.name)}
+                  {t("product.downloadDesc").replace("{name}", content.name[locale])}
                 </p>
               </div>
 
@@ -396,7 +396,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
                 {t("product.highlights")}
               </span>
               <h2 className="text-4xl font-black tracking-tight text-gray-900 sm:text-5xl lg:text-6xl mb-8">
-                {t("product.whyApp").replace("{name}", content.name)}
+                {t("product.whyApp").replace("{name}", content.name[locale])}
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-12">
                 {content.description[locale]}
@@ -468,7 +468,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
                 {t("product.faqs")}
               </h2>
               <p className="text-gray-600">
-                {t("product.faqsDesc").replace("{name}", content.name)}
+                {t("product.faqsDesc").replace("{name}", content.name[locale])}
               </p>
             </div>
             <FAQAccordion
