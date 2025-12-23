@@ -182,14 +182,12 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                         >
                             <Share2 className="h-5 w-5" /> Diğer
                         </button>
-                        <button
-                            onClick={() =>
-                                (window.location.href = `mailto:info@kfsoftware.com?subject=Yorum: ${post.title}`)
-                            }
+                        <Link
+                            href="/contact"
                             className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 text-gray-600 rounded-2xl font-black hover:bg-gray-100 transition-all cursor-pointer w-full sm:w-auto"
                         >
                             <MessageCircle className="h-5 w-5" /> Yorum Yap
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
