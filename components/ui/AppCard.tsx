@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Users, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Users, CheckCircle2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 import { useTranslation } from "@/lib/i18n";
@@ -99,32 +99,36 @@ export function AppCard({
       <div className="mt-6 flex flex-col gap-3 w-full relative z-10">
         {/* Store Buttons */}
         <div className="grid grid-cols-2 gap-3">
-          <motion.a
-            whileTap={{ scale: 0.95 }}
-            href={storeLinks?.ios || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex justify-center transition-opacity hover:opacity-80 ${!storeLinks?.ios && "opacity-30 grayscale pointer-events-none"}`}
+          <button
+            onClick={() => alert("Mobil uygulamalarımız çok yakında App Store'da!")}
+            className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
           >
+            <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
+              <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
+                <Lock className="w-3.5 h-3.5 text-gray-500" />
+              </div>
+            </div>
             <img
               src={locale === "tr" ? "/badges/app-store-tr.png" : "/badges/app-store-en.png"}
               alt="App Store"
-              className="h-[40px] w-auto object-contain"
+              className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
             />
-          </motion.a>
-          <motion.a
-            whileTap={{ scale: 0.95 }}
-            href={storeLinks?.android || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex justify-center transition-opacity hover:opacity-80 ${!storeLinks?.android && "opacity-30 grayscale pointer-events-none"}`}
+          </button>
+          <button
+            onClick={() => alert("Mobil uygulamalarımız çok yakında Google Play'de!")}
+            className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
           >
+            <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
+              <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
+                <Lock className="w-3.5 h-3.5 text-gray-500" />
+              </div>
+            </div>
             <img
               src={locale === "tr" ? "/badges/google-play-tr.png" : "/badges/google-play-en.png"}
               alt="Google Play"
-              className="h-[40px] w-auto object-contain"
+              className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
             />
-          </motion.a>
+          </button>
         </div>
 
         {/* Web App Button */}
