@@ -1,30 +1,136 @@
-import { blogPosts as staticPosts } from "@/lib/blog";
-import BlogPostClient from "./BlogPostClient";
 import { supabase } from "@/lib/supabase";
+import { notFound } from "next/navigation";
+import BlogPostUI from "./BlogPostUI";
+import { Metadata } from "next";
 
-export async function generateStaticParams() {
-  // Generate params only for known static posts + maybe some recent dynamic ones if possible,
-  // but for now, even static posts are enough to satisfy the build export requirement.
-  // If we want dynamic routes that ALREADY exist to be pre-rendered, we can query Supabase here.
+// Force static generation
+export const dynamic = 'force-static';
+// Revalidate every hour if needed, though for pure static export this is ignored (build time only)
+export const revalidate = 3600;
 
-  let slugs = staticPosts.map((post) => ({
-    slug: post.slug,
-  }));
-
-  try {
-    const { data } = await supabase.from("posts").select("slug").eq("is_published", true);
-    if (data) {
-      const dynamicSlugs = data.map((p) => ({ slug: p.slug }));
-      slugs = [...slugs, ...dynamicSlugs];
-    }
-  } catch (e) {
-    console.warn("Could not fetch dynamic slugs during build:", e);
-  }
-
-  return slugs;
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+// 1. Generate Static Params (Build Time)
+export async function generateStaticParams() {
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("slug")
+    .eq("is_published", true);
+
+  if (!posts) return [];
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+// 2. Generate Metadata
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  return <BlogPostClient slug={slug} />;
+  const { data: post } = await supabase
+    .from("posts")
+    .select("title, excerpt, image_url")
+    .eq("slug", slug)
+    .single();
+
+  if (!post) {
+    return {
+      title: "Yazı Bulunamadı | KF Software",
+    };
+  }
+
+  return {
+    title: `${post.title} | KF Software Blog`,
+    description: post.excerpt || "KF Software Blog yazısı.",
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || "",
+      type: "article",
+      images: post.image_url ? [post.image_url] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt || "",
+      images: post.image_url ? [post.image_url] : [],
+    },
+  };
+}
+
+// 3. Serve the Page Content
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const { data: post } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .single();
+
+  if (!post) {
+    notFound();
+  }
+
+  // Fetch related posts (same category, different slug, limit 3)
+  const { data: relatedPostsData } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("is_published", true)
+    .neq("slug", slug)
+    .eq("category", post.category) // Try same category first
+    .limit(3);
+
+  let finalRelatedPosts = relatedPostsData || [];
+
+  // If not enough related posts, fill with recent posts
+  if (finalRelatedPosts.length < 3) {
+    const { data: recentPosts } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("is_published", true)
+      .neq("slug", slug)
+      .not("id", "in", `(${finalRelatedPosts.map((p) => p.id).join(",")})`) // Exclude already found
+      .limit(3 - finalRelatedPosts.length);
+
+    if (recentPosts) {
+      finalRelatedPosts = [...finalRelatedPosts, ...recentPosts];
+    }
+  }
+
+  // Format related posts
+  const formattedRelatedPosts = finalRelatedPosts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt || "",
+    date: new Date(p.created_at).toLocaleDateString("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    category: p.category,
+    author: p.author || "KF Software Team",
+    image: p.image_url || "/apps/puantajx/logo.png",
+  }));
+
+  // Format the main post data for the UI component
+  const formattedPost = {
+    title: post.title,
+    content: post.content,
+    date: new Date(post.created_at).toLocaleDateString("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    category: post.category,
+    author: post.author,
+    image: post.image_url || "/apps/puantajx/logo.png",
+    tags: post.tags || [],
+    rawDate: post.created_at,
+  };
+
+  return <BlogPostUI post={formattedPost} relatedPosts={formattedRelatedPosts} />;
 }

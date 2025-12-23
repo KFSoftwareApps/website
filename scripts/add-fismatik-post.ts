@@ -78,7 +78,7 @@ async function main() {
     console.error("Error inserting post:", error);
   } else {
     console.log("Success! Post inserted:", data[0].title);
-    console.log("Check it out at: /blog/read?slug=" + post.slug);
+    console.log("Check it out at: /blog/" + post.slug);
   }
 }
 

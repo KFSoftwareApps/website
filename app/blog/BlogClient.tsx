@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function BlogClient() {
   const { t, locale } = useTranslation();
   const [posts, setPosts] = useState<any[]>([]);
+  // Start with loading true only if we are fetching data
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -87,7 +88,7 @@ export default function BlogClient() {
     <div className="bg-white py-24 sm:py-32 min-h-screen font-body">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl font-black tracking-tight text-gray-900 sm:text-5xl"
@@ -96,7 +97,7 @@ export default function BlogClient() {
             <span className="text-blue-600">
               {t("blog.title").split("&")[1] || t("blog.updates")}
             </span>
-          </motion.h2>
+          </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -137,11 +138,10 @@ export default function BlogClient() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
-                  selectedCategory === cat
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20 scale-105"
-                    : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-                }`}
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${selectedCategory === cat
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20 scale-105"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                  }`}
               >
                 {cat === "All"
                   ? t("blog.allCategories")
