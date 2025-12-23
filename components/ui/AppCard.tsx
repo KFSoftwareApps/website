@@ -132,24 +132,42 @@ export function AppCard({
         </div>
 
         {webUrl && (
-          <div className="relative w-full group">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={(e) => {
-                e.preventDefault();
-                alert(`${name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`);
-              }}
-              className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 h-11 rounded-2xl uppercase tracking-tighter opacity-60 grayscale cursor-not-allowed"
+          name === "FişMatik" ? (
+            <a
+              href={webUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-full group z-10"
+              onClick={(e) => e.stopPropagation()}
             >
-              💻 Web Version
-            </Button>
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="bg-black/80 p-1.5 rounded-full text-white shadow-sm border border-white/10 backdrop-blur-md">
-                <Lock className="h-3 w-3" />
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 h-11 rounded-2xl uppercase tracking-tighter"
+              >
+                💻 Web Version
+              </Button>
+            </a>
+          ) : (
+            <div className="relative w-full group">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert(`${name} Web sürümü şu an güncelleniyor. Çok yakında yeni arayüzüyle yayında olacak! 🚀`);
+                }}
+                className="w-full text-xs font-bold border-blue-200 text-blue-700 bg-blue-50 h-11 rounded-2xl uppercase tracking-tighter opacity-60 grayscale cursor-not-allowed"
+              >
+                💻 Web Version
+              </Button>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="bg-black/80 p-1.5 rounded-full text-white shadow-sm border border-white/10 backdrop-blur-md">
+                  <Lock className="h-3 w-3" />
+                </div>
               </div>
             </div>
-          </div>
+          )
         )}
 
         {/* Review Button */}
