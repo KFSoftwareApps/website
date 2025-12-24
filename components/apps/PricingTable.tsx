@@ -31,6 +31,10 @@ const features: PlanFeature[] = [
         values: ["20 giriş/ay", "50 giriş/ay", "100 giriş/ay", "200 giriş/ay"],
     },
     {
+        name: { tr: "📍 Şehrimde En Ucuz", en: "📍 Cheapest in My City" },
+        values: [false, false, true, true],
+    },
+    {
         name: { tr: "Sınırsız Abonelik Takibi", en: "Unlimited Subscription Tracking" },
         values: [true, true, true, true],
     },
