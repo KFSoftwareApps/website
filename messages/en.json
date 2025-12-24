@@ -154,6 +154,7 @@
     "relatedPostsSubtitle": "Other articles you might find interesting.",
     "totalPosts": "Total Posts",
     "activePosts": "Published",
-    "draftPosts": "Draft"
+    "draftPosts": "Draft",
+    "minRead": "min read"
   }
 }
