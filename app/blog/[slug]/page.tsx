@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import BlogPostUI from "./BlogPostUI";
 import { Metadata } from "next";
+import { calculateReadingTime } from "@/lib/utils";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -138,6 +139,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     tags: post.tags || [],
     rawDate: post.created_at,
     shortCode: post.short_code,
+    readingTime: calculateReadingTime(post.content || ""),
   };
 
   return <BlogPostUI post={formattedPost} relatedPosts={formattedRelatedPosts} />;

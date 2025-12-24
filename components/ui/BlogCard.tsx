@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Calendar, User, ArrowRight } from "lucide-react";
+import { Calendar, User, ArrowRight, Clock } from "lucide-react";
 import { BlogPost } from "@/lib/blog";
 import { useTranslation } from "@/lib/i18n";
 
@@ -58,6 +58,12 @@ export default function BlogCard({ post, index }: BlogCardProps) {
             <User className="h-3 w-3" />
             {post.author}
           </div>
+          {post.readingTime && (
+            <div className="flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              {post.readingTime} {t("blog.minRead", { defaultValue: "dk" })}
+            </div>
+          )}
         </div>
 
         <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">

@@ -7,6 +7,7 @@ import BlogCard from "@/components/ui/BlogCard";
 import { Loader2, Search, X } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
+import { calculateReadingTime } from "@/lib/utils";
 
 export default function BlogClient() {
   const { t, locale } = useTranslation();
@@ -43,6 +44,7 @@ export default function BlogClient() {
             content: post.content || "",
             rawDate: post.published_at || post.created_at,
             display_order: post.display_order || 0,
+            readingTime: calculateReadingTime(post.content || ""),
           }));
 
           // Explicitly sort by display_order (ASC) then date (DESC)

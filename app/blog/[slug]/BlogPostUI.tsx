@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, User, ChevronLeft, Share2, MessageCircle, Twitter, Instagram } from "lucide-react";
+import { Calendar, User, ChevronLeft, Share2, MessageCircle, Twitter, Instagram, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -9,6 +9,8 @@ import SocialShareModal from "@/components/ui/SocialShareModal";
 import { useTranslation } from "@/lib/i18n";
 
 import BlogCard from "@/components/ui/BlogCard";
+import Lightbox from "@/components/ui/Lightbox";
+import { useEffect } from "react";
 
 interface BlogPostUIProps {
     post: {
@@ -21,6 +23,7 @@ interface BlogPostUIProps {
         tags?: string[];
         rawDate?: string;
         shortCode?: string;
+        readingTime?: number;
     };
     relatedPosts?: any[];
 }
@@ -30,16 +33,48 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const [sharePlatform, setSharePlatform] = useState<"twitter" | "instagram" | null>(null);
 
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxSrc, setLightboxSrc] = useState("");
+    const [lightboxAlt, setLightboxAlt] = useState("");
+
     const openShare = (platform: "twitter" | "instagram") => {
         setSharePlatform(platform);
         setIsShareModalOpen(true);
     };
+
+    useEffect(() => {
+        const images = document.querySelectorAll(".blog-content img");
+
+        const handleImageClick = (e: Event) => {
+            const img = e.target as HTMLImageElement;
+            setLightboxSrc(img.src);
+            setLightboxAlt(img.alt);
+            setLightboxOpen(true);
+        };
+
+        images.forEach((img) => {
+            img.classList.add("cursor-zoom-in", "transition-transform", "hover:scale-[1.01]");
+            img.addEventListener("click", handleImageClick);
+        });
+
+        return () => {
+            images.forEach((img) => {
+                img.removeEventListener("click", handleImageClick);
+            });
+        };
+    }, [post.content]);
 
     // Extract text content from HTML for better excerpt generation if needed
     const cleanExcerpt = post.content.replace(/<[^>]+>/g, '').substring(0, 150);
 
     return (
         <div className="bg-white min-h-screen pb-24 font-body">
+            <Lightbox
+                isOpen={lightboxOpen}
+                onClose={() => setLightboxOpen(false)}
+                src={lightboxSrc}
+                alt={lightboxAlt}
+            />
             <SocialShareModal
                 isOpen={isShareModalOpen}
                 onClose={() => setIsShareModalOpen(false)}
@@ -101,6 +136,12 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                                     <Calendar className="h-4 w-4 text-blue-400" />
                                     {post.date}
                                 </div>
+                                {post.readingTime && (
+                                    <div className="flex items-center gap-2 font-bold text-sm">
+                                        <Clock className="h-4 w-4 text-blue-400" />
+                                        {post.readingTime} {t("blog.minRead", { defaultValue: "min read" })}
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     </div>
