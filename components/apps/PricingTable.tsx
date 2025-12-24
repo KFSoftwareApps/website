@@ -11,8 +11,16 @@ interface PlanFeature {
 
 const features: PlanFeature[] = [
     {
+        name: { tr: "Günlük Fiş Tarama", en: "Daily Receipt Scanning" },
+        values: ["1 fiş/gün", "10 fiş/gün", "25 fiş/gün", "35 fiş/gün"],
+    },
+    {
+        name: { tr: "Aylık Manuel Giriş", en: "Monthly Manual Entry" },
+        values: ["20 giriş/ay", "50 giriş/ay", "100 giriş/ay", "200 giriş/ay"],
+    },
+    {
         name: { tr: "🛍️ Alışveriş Listesi (YENİ)", en: "🛍️ Shopping List (NEW)" },
-        values: ["❌ (Gizli)", "❌ (Gizli)", "✅ (Kişisel)", "✅ (Ortak Liste)"],
+        values: ["❌", "❌", "✅ (Kişisel)", "✅ (Ortak Liste)"],
     },
     {
         name: { tr: "🧠 Akıllı Ürün Önerisi (YENİ)", en: "🧠 Smart Product Recommendation (NEW)" },
@@ -21,14 +29,6 @@ const features: PlanFeature[] = [
     {
         name: { tr: "📲 Otomatik SMS Takibi (YENİ)", en: "📲 Automatic SMS Tracking (NEW)" },
         values: ["✅ (Android)", "✅ (Android)", "✅ (Android)", "✅ (Android)"],
-    },
-    {
-        name: { tr: "Günlük Fiş Tarama", en: "Daily Receipt Scanning" },
-        values: ["1 fiş/gün", "10 fiş/gün", "25 fiş/gün", "35 fiş/gün"],
-    },
-    {
-        name: { tr: "Aylık Manuel Giriş", en: "Monthly Manual Entry" },
-        values: ["20 giriş/ay", "50 giriş/ay", "100 giriş/ay", "200 giriş/ay"],
     },
     {
         name: { tr: "📍 Şehrimde En Ucuz", en: "📍 Cheapest in My City" },
