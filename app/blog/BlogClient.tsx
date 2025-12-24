@@ -40,7 +40,12 @@ export default function BlogClient() {
             author: post.author || (locale === "tr" ? "KF Software Ekibi" : "KF Software Team"),
             image: post.image_url || "/apps/puantajx/logo.png",
             content: post.content || "",
+            rawDate: post.published_at || post.created_at,
           }));
+
+          // Explicitly sort by date desc to handle any potential DB sorting quirks
+          mappedPosts.sort((a: any, b: any) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime());
+
           setPosts(mappedPosts);
         } else {
           // Localize static posts date if needed
