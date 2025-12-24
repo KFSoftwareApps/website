@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const { data: post } = await supabase
     .from("posts")
-    .select("title, excerpt, image_url")
+    .select("title, excerpt, image_url, language")
     .eq("slug", slug)
     .single();
 
@@ -44,9 +44,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const isEn = post.language === "en";
+  const suffix = isEn ? "Blog" : "Blog"; // Adjust if needed
+
   return {
-    title: `${post.title} | KF Software Blog`,
-    description: post.excerpt || "KF Software Blog yazısı.",
+    title: `${post.title} | KF Software ${suffix}`,
+    description: post.excerpt || (isEn ? "KF Software Blog post." : "KF Software Blog yazısı."),
     openGraph: {
       title: post.title,
       description: post.excerpt || "",
@@ -110,7 +113,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
-    date: new Date(p.published_at || p.created_at).toLocaleDateString("tr-TR", {
+    date: new Date(p.published_at || p.created_at).toLocaleDateString(p.language === "en" ? "en-US" : "tr-TR", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -124,7 +127,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const formattedPost = {
     title: post.title,
     content: post.content,
-    date: new Date(post.published_at || post.created_at).toLocaleDateString("tr-TR", {
+    date: new Date(post.published_at || post.created_at).toLocaleDateString(post.language === "en" ? "en-US" : "tr-TR", {
       day: "numeric",
       month: "long",
       year: "numeric",

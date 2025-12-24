@@ -32,6 +32,7 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
   const [isPublished, setIsPublished] = useState(false);
   const [publishedAt, setPublishedAt] = useState("");
   const [shortCode, setShortCode] = useState("");
+  const [language, setLanguage] = useState<"tr" | "en">("tr");
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const router = useRouter();
@@ -62,6 +63,7 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
         setPublishedAt(localISOTime);
       }
       setShortCode(data.short_code || "");
+      setLanguage(data.language || "tr");
       if (data.tags && Array.isArray(data.tags)) {
         setTags(data.tags.join(", "));
       }
@@ -92,6 +94,7 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
       published_at: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
       tags: tagsArray,
       short_code: finalShortCode,
+      language: language,
     };
 
     let error;
@@ -239,6 +242,20 @@ export default function BlogEditor({ postId }: BlogEditorProps) {
                   <option value="Duyuru">Duyuru</option>
                   <option value="Rehber">Rehber</option>
                   <option value="Teknoloji">Teknoloji</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
+                  Yazı Dili
+                </label>
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value as "tr" | "en")}
+                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="tr">🇹🇷 Türkçe (TR)</option>
+                  <option value="en">🇺🇸 İngilizce (EN)</option>
                 </select>
               </div>
 

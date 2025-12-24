@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import SocialShareModal from "@/components/ui/SocialShareModal";
+import { useTranslation } from "@/lib/i18n";
 
 import BlogCard from "@/components/ui/BlogCard";
 
@@ -25,6 +26,7 @@ interface BlogPostUIProps {
 }
 
 export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps) {
+    const { t } = useTranslation();
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const [sharePlatform, setSharePlatform] = useState<"twitter" | "instagram" | null>(null);
 
@@ -73,7 +75,7 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                                 href="/blog"
                                 className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors text-sm font-bold bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20"
                             >
-                                <ChevronLeft className="h-4 w-4" /> Blog'a Dön
+                                <ChevronLeft className="h-4 w-4" /> {t("blog.backToBlog")}
                             </Link>
                             <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 drop-shadow-2xl">
                                 {post.title}
@@ -142,7 +144,7 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                     {post.tags && post.tags.length > 0 && (
                         <div className="flex items-center gap-3 w-full">
                             <span className="text-sm font-bold text-gray-400 uppercase tracking-widest min-w-fit">
-                                Etiketler:
+                                {t("blog.tags")}:
                             </span>
                             <div className="flex flex-wrap gap-2">
                                 {post.tags.map((tag: string, i: number) => (
@@ -201,10 +203,10 @@ export default function BlogPostUI({ post, relatedPosts = [] }: BlogPostUIProps)
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl font-black tracking-tight text-gray-900 sm:text-4xl">
-                                Bunları da Beğenebilirsiniz
+                                {t("blog.relatedPosts")}
                             </h2>
                             <p className="mt-4 text-lg text-gray-600">
-                                İlginizi çekebilecek diğer yazılarımız.
+                                {t("blog.relatedPostsSubtitle")}
                             </p>
                         </div>
                         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">

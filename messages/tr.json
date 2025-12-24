@@ -137,6 +137,13 @@
       "Duyuru": "Duyuru",
       "Haber": "Haber",
       "Genel": "Genel"
-    }
+    },
+    "backToBlog": "Blog'a Dön",
+    "tags": "Etiketler",
+    "relatedPosts": "Bunları da Beğenebilirsiniz",
+    "relatedPostsSubtitle": "İlginizi çekebilecek diğer yazılarımız.",
+    "totalPosts": "Toplam Yazı",
+    "activePosts": "Yayında",
+    "draftPosts": "Taslak"
   }
 }

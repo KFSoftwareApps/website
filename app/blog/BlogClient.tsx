@@ -23,6 +23,7 @@ export default function BlogClient() {
           .from("posts")
           .select("*")
           .eq("is_published", true)
+          .eq("language", locale)
           .lte("published_at", new Date().toISOString())
           .order("published_at", { ascending: false });
 

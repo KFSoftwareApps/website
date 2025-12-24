@@ -147,6 +147,13 @@
       "Duyuru": "Announcement",
       "Haber": "News",
       "Genel": "General"
-    }
+    },
+    "backToBlog": "Back to Blog",
+    "tags": "Tags",
+    "relatedPosts": "You May Also Like",
+    "relatedPostsSubtitle": "Other articles you might find interesting.",
+    "totalPosts": "Total Posts",
+    "activePosts": "Published",
+    "draftPosts": "Draft"
   }
 }
