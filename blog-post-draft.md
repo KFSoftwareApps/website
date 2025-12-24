@@ -4,7 +4,11 @@
 
 **Başlık:** FişMatik Vizyonu: Yapay Zeka ve Akıllı Finans Çağı Başlıyor! 🚀
 
+**Slug (URL):** `fismatik-vizyonu-yapay-zeka-ve-akilli-finans-cagi`
+
 **Kısa Özet:** FişMatik sadece bir gider takipçisi olmaktan çıkıp, cebinizdeki akıllı finans asistanına dönüşüyor. AI destekli abonelik takibi, sosyal fiyat karşılaştırması ve çok daha fazlası yolda!
+
+**Etiketler:** `FişMatik, Yapay Zeka, Bütçe Takibi, Akıllı Finans, Finansal Özgürlük, Güncelleme`
 
 ---
 
@@ -42,7 +46,11 @@ Gelecek, cebinizdeki akıllı asistanla çok daha parlak! Bizi takip etmeye deva
 
 **Title:** FisMatik Vision: The Era of AI and Smart Finance Begins! 🚀
 
+**Slug (URL):** `fismatik-vision-ai-and-smart-finance-era`
+
 **Short Summary:** FisMatik is evolving from just an expense tracker into a smart finance assistant in your pocket. AI-powered subscription tracking, social price comparison, and more are on the way!
+
+**Tags:** `FişMatik, AI, Budget Tracking, Smart Finance, Financial Freedom, Update`
 
 ---
 

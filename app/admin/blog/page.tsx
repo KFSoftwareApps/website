@@ -22,6 +22,7 @@ export default function AdminBlogList() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState<"All" | "tr" | "en">("All");
 
   useEffect(() => {
     fetchPosts();
@@ -47,9 +48,11 @@ export default function AdminBlogList() {
     }
   };
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesLanguage = selectedLanguage === "All" || post.language === selectedLanguage;
+    return matchesSearch && matchesLanguage;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -83,11 +86,31 @@ export default function AdminBlogList() {
             </div>
           </div>
 
+          <div className="px-6 pb-6 border-b border-gray-50 flex flex-wrap gap-2">
+            {[
+              { id: "All", label: "Hepsi", count: posts.length },
+              { id: "tr", label: "Türkçe (TR)", count: posts.filter((p) => p.language === "tr").length },
+              { id: "en", label: "İngilizce (EN)", count: posts.filter((p) => p.language === "en").length },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setSelectedLanguage(tab.id as any)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${selectedLanguage === tab.id
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                    : "bg-gray-50 text-gray-500 hover:bg-gray-100"
+                  }`}
+              >
+                {tab.label} ({tab.count})
+              </button>
+            ))}
+          </div>
+
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-50/50 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">
                   <th className="px-8 py-4">Başlık / Slug</th>
+                  <th className="px-8 py-4 text-center">Dil</th>
                   <th className="px-8 py-4">Kategori</th>
                   <th className="px-8 py-4">Durum</th>
                   <th className="px-8 py-4">Tarih</th>
@@ -124,6 +147,16 @@ export default function AdminBlogList() {
                             </p>
                             <p className="text-xs text-gray-400 font-mono">/{post.slug}</p>
                           </div>
+                        </td>
+                        <td className="px-8 py-4 text-center">
+                          <span
+                            className={`px-2 py-1 rounded text-[10px] font-black uppercase ${post.language === "en"
+                                ? "bg-indigo-50 text-indigo-600 border border-indigo-100"
+                                : "bg-red-50 text-red-600 border border-red-100"
+                              }`}
+                          >
+                            {post.language === "en" ? "🇺🇸 EN" : "🇹🇷 TR"}
+                          </span>
                         </td>
                         <td className="px-8 py-4">
                           <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-[10px] font-black uppercase">
