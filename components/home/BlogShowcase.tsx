@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { calculateReadingTime } from "@/lib/utils";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -23,6 +24,8 @@ interface Post {
   published_at: string;
   created_at: string;
   author: string;
+  content: string;
+  readingTime?: number;
 }
 
 export default function BlogShowcase() {
@@ -35,13 +38,21 @@ export default function BlogShowcase() {
         .from("posts")
         .select("*")
         .eq("is_published", true)
+        .eq("language", locale)
+        .order("display_order", { ascending: true })
         .order("created_at", { ascending: false })
         .limit(3);
 
-      if (data) setPosts(data);
+      if (data) {
+        const mappedPosts = data.map(post => ({
+          ...post,
+          readingTime: calculateReadingTime(post.content || "")
+        }));
+        setPosts(mappedPosts);
+      }
     }
     fetchPosts();
-  }, []);
+  }, [locale]);
 
   if (posts.length === 0) return null;
 
@@ -98,6 +109,12 @@ export default function BlogShowcase() {
                       <User className="h-3.5 w-3.5" />
                       {post.author || (locale === "tr" ? "KF Ekibi" : "KF Team")}
                     </div>
+                    {post.readingTime && (
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5" />
+                        {post.readingTime} {t("blog.minRead", { defaultValue: "dk" })}
+                      </div>
+                    )}
                   </div>
                 </div>
               </article>
