@@ -19,12 +19,13 @@ export default function BlogClient() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from("posts")
-          .select("*")
+          .select("slug, title, excerpt, image_url, published_at, created_at, category, author, language, content, display_order")
           .eq("is_published", true)
           .eq("language", locale)
           .lte("published_at", new Date().toISOString())
+          .order("display_order", { ascending: true })
           .order("published_at", { ascending: false });
 
         if (data && data.length > 0) {
@@ -41,10 +42,16 @@ export default function BlogClient() {
             image: post.image_url || "/apps/puantajx/logo.png",
             content: post.content || "",
             rawDate: post.published_at || post.created_at,
+            display_order: post.display_order || 0,
           }));
 
-          // Explicitly sort by date desc to handle any potential DB sorting quirks
-          mappedPosts.sort((a: any, b: any) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime());
+          // Explicitly sort by display_order (ASC) then date (DESC)
+          mappedPosts.sort((a: any, b: any) => {
+            const orderDiff = (a.display_order ?? 0) - (b.display_order ?? 0);
+            if (orderDiff !== 0) return orderDiff;
+
+            return new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime();
+          });
 
           setPosts(mappedPosts);
         } else {
