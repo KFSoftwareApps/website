@@ -38,29 +38,29 @@ export const appsContent: Record<string, AppContent> = {
     id: "puantajx",
     name: { tr: "PuantajX", en: "PuantajX" },
     tagline: {
-      tr: "Şantiye ve proje ekiplerini tek yerden yönetin.",
-      en: "Manage construction and project teams in one place.",
+      tr: "Şantiye puantaj, personel ve proje ekiplerini tek yerden yönetin.",
+      en: "Manage construction timesheets and project teams in one place.",
     },
     description: {
-      tr: "PuantajX, şantiye ve proje ekipleri için zaman çizelgelerini, günlük raporları ve ilerleme/maliyet takibini tek bir yerden yönetmenizi sağlar. Proje bazlı çalışma programları ile ekipleri tanımlayın, günlük çalışma saatlerini girin, raporlar oluşturun ve saniyeler içinde periyodik ilerleme özetleri alın.",
+      tr: "PuantajX, şantiye ve inşaat projeleriniz için geliştirilmiş en kapsamlı **puantaj takip programıdır**. Personel zaman çizelgeleri, **günlük şantiye raporları**, hakediş hesaplama ve maliyet takibini tek bir mobil uygulamada birleştirir. Excel puantaj cetvelleriyle uğraşmayı bırakın; ekiplerinizi tanımlayın, **günlük puantaj** girişlerini yapın ve saniyeler içinde detaylı PDF raporlar alın.",
       en: "PuantajX allows you to manage timesheets, daily reports, and progress/cost tracking for construction and project teams in one place. Define teams with project-based schedules, enter daily work hours, create reports, and get periodic progress summaries in seconds.",
     },
     highlights: [
       {
-        tr: "Puantaj kayıtlarını ve maliyet takibini tek ekranda yönetin",
+        tr: "Online puantaj defteri ile personel ve maliyet takibi",
         en: "Manage timesheets and cost tracking on a single screen",
       },
       {
-        tr: "Günlük raporlar ve şantiye görsellerini arşivleyin",
+        tr: "Resimli günlük şantiye raporları oluşturun ve arşivleyin",
         en: "Archive daily reports and construction site images",
       },
       {
-        tr: "Çalışan hakedişlerini otomatik hesaplayın",
+        tr: "İnşaat personel hakedişlerini ve mesaileri otomatik hesaplayın",
         en: "Automatically calculate employee accruals",
       },
-      { tr: "Proje bazlı ekip ve vardiya yönetimi", en: "Project-based team and shift management" },
-      { tr: "Anlık PDF ve Excel raporlama", en: "Instant PDF and Excel reporting" },
-      { tr: "Bulut tabanlı güvenli veri saklama", en: "Secure cloud-based data storage" },
+      { tr: "Proje bazlı ekip, usta ve vardiya yönetimi", en: "Project-based team and shift management" },
+      { tr: "Tek tıkla Excel ve PDF puantaj raporu indirme", en: "Instant PDF and Excel reporting" },
+      { tr: "Bulut tabanlı güvenli veri saklama ve yedekleme", en: "Secure cloud-based data storage" },
     ],
     features: [
       {

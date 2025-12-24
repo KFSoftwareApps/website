@@ -5,12 +5,26 @@ import { Metadata } from "next";
 const content = appsContent.puantajx;
 
 export const metadata: Metadata = {
-  title: content ? `${content.name} - Şantiye ve Personel Takip Sistemi` : "PuantajX",
-  description: content?.description.tr || "PuantajX ile şantiyenizi yönetin.",
+  title: "PuantajX | Şantiye Puantaj ve Personel Takip Programı",
+  description:
+    "Şantiye puantaj takibi artık cebinizde. İnşaat personel yönetimi, günlük raporlama ve hakediş hesabı için en iyi puantaj uygulaması.",
+  keywords: [
+    "puantaj",
+    "şantiye takip",
+    "inşaat personel",
+    "hakediş programı",
+    "günlük rapor",
+    "mobil puantaj",
+    "işçi takibi",
+    "inşaat yazılımı",
+  ],
   openGraph: {
-    title: content ? `${content.name} - Şantiye Yönetimi Cebinizde` : "PuantajX",
-    description: content?.description.tr || "PuantajX ile şantiyenizi yönetin.",
-    images: [`/apps/puantajx/screenshots/1.png`],
+    title: "PuantajX | Şantiye Puantaj ve Personel Takip Programı",
+    description:
+      "Şantiye puantaj takibi artık cebinizde. İnşaat personel yönetimi, günlük raporlama ve hakediş hesabı için en iyi puantaj uygulaması.",
+    images: [`/apps/puantajx/screenshots/1-v5.png`],
+    type: "website",
+    locale: "tr_TR",
   },
   icons: {
     icon: "/apps/puantajx/logo.png",
@@ -38,12 +52,21 @@ export default function PuantajXPage() {
               price: "0",
               priceCurrency: "TRY",
             },
-            description: "Şantiye ve personel yönetimini kolaylaştıran mobil uygulama.",
+            description:
+              "Şantiye ve personel yönetimini kolaylaştıran, hakediş hesaplayan mobil puantaj uygulaması.",
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.8",
               ratingCount: "120",
             },
+            featureList: [
+              "Online Puantaj",
+              "Günlük Şantiye Raporu",
+              "İnşaat Hakediş Hesaplama",
+              "Ekip Yönetimi",
+              "PDF/Excel Dışa Aktarım",
+            ],
+            screenshot: "https://kfsoftware.app/apps/puantajx/screenshots/1-v5.png",
           }),
         }}
       />
