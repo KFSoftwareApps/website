@@ -36,7 +36,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
           local-dir: ./out/
-          server-dir: ./public_html/
-          # DİKKAT: server-dir Hostinger'da genellikle ./public_html/ şeklindedir.
-          # Eğer ana dizine değil de alt klasöre atıyorsanız burayı değiştirin.
+          server-dir: /public_html/
+          exclude: |
+            **/.DS_Store
+            **/.git*
+            **/.github*
