@@ -11,6 +11,18 @@ interface PlanFeature {
 
 const features: PlanFeature[] = [
     {
+        name: { tr: "🛍️ Alışveriş Listesi (YENİ)", en: "🛍️ Shopping List (NEW)" },
+        values: ["❌ (Gizli)", "❌ (Gizli)", "✅ (Kişisel)", "✅ (Ortak Liste)"],
+    },
+    {
+        name: { tr: "🧠 Akıllı Ürün Önerisi (YENİ)", en: "🧠 Smart Product Recommendation (NEW)" },
+        values: [false, false, true, true],
+    },
+    {
+        name: { tr: "📲 Otomatik SMS Takibi (YENİ)", en: "📲 Automatic SMS Tracking (NEW)" },
+        values: ["✅ (Android)", "✅ (Android)", "✅ (Android)", "✅ (Android)"],
+    },
+    {
         name: { tr: "Günlük Fiş Tarama", en: "Daily Receipt Scanning" },
         values: ["1 fiş/gün", "10 fiş/gün", "25 fiş/gün", "35 fiş/gün"],
     },
