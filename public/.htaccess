@@ -1,0 +1,3 @@
+# 301 Redirects for typo fixes
+# Redirect old "puntajx" URL to correct "puantajx"
+RedirectMatch 301 ^/apps/puntajx/?$ /apps/puantajx/
