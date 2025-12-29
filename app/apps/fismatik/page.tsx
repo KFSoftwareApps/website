@@ -5,10 +5,10 @@ import { Metadata } from "next";
 const content = appsContent.fismatik;
 
 export const metadata: Metadata = {
-  title: content ? `${content.name} - Akıllı Bütçe ve Gider Takibi` : "FişMatik",
+  title: content ? `${content.name.tr} - Akıllı Bütçe ve Gider Takibi` : "FişMatik",
   description: content?.description.tr || "FişMatik ile bütçenizi yönetin.",
   openGraph: {
-    title: content ? `${content.name} - Harcamalarınızı Kontrol Altına Alın` : "FişMatik",
+    title: content ? `${content.name.tr} - Harcamalarınızı Kontrol Altına Alın` : "FişMatik",
     description: content?.description.tr || "FişMatik ile bütçenizi yönetin.",
     images: [`/apps/fismatik/screenshots/1.png`],
   },
