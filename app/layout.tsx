@@ -9,6 +9,7 @@ import CookieConsent from "@/components/ui/CookieConsent";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import AnalyticsTracker from "@/components/ui/AnalyticsTracker";
 import { LanguageProvider } from "@/lib/i18n";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -85,6 +86,12 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <GoogleAnalytics gaId="G-XYZ1234567" />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3855771133052397"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <LanguageProvider>
           <LayoutWrapper>{children}</LayoutWrapper>
           <TestTeamWidget />
