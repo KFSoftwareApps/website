@@ -30,9 +30,31 @@ function TermsContent({ initialLang }: TermsClientProps) {
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {isEnglish ? "Terms of Service" : "Kullanım Şartları"}
           </h1>
-          <Link href="/">
-            <Button variant="ghost">{isEnglish ? "Back to Home" : "Ana Sayfaya Dön"}</Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <div className="flex bg-gray-100 p-1 rounded-lg">
+              <Link
+                href={`/terms/tr?app=${activeTab}`}
+                className={cn(
+                  "px-3 py-1 text-xs font-medium rounded-md transition-colors",
+                  !isEnglish ? "bg-white text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                )}
+              >
+                TR
+              </Link>
+              <Link
+                href={`/terms/en?app=${activeTab}`}
+                className={cn(
+                  "px-3 py-1 text-xs font-medium rounded-md transition-colors",
+                  isEnglish ? "bg-white text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                )}
+              >
+                EN
+              </Link>
+            </div>
+            <Link href="/">
+              <Button variant="ghost">{isEnglish ? "Back to Home" : "Ana Sayfaya Dön"}</Button>
+            </Link>
+          </div>
         </div>
 
         {/* Tabs */}

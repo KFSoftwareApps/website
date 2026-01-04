@@ -1,3 +1,14 @@
-# 301 Redirects for typo fixes
+# Handle extensionless URLs for Next.js static export
+RewriteEngine On
+
 # Redirect old "puntajx" URL to correct "puantajx"
-RedirectMatch 301 ^/apps/puntajx/?$ /apps/puantajx/
+RewriteRule ^apps/puntajx/?$ /apps/puantajx/ [R=301,L]
+
+# Serve HTML files without the .html extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [L]
+
+# Handle dynamic routes like /terms/tr -> /terms/tr.html
+# This is already covered by the generic .html rule above if Next.js outputs terms/tr.html
