@@ -13,22 +13,25 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const isEn = params.lang === "en";
+    const { lang } = await params;
+    const isEn = lang === "en";
     return {
         title: isEn ? "Terms of Service | KF Software" : "Kullanım Şartları | KF Software Türkiye",
         description: isEn
             ? "Terms of service and service agreement for our PuantajX and FişMatik applications."
             : "PuantajX ve FişMatik uygulamalarımızın kullanım koşulları ve hizmet sözleşmesi.",
         alternates: {
-            canonical: `https://kfsoftware.app/terms/${params.lang}`,
+            canonical: `https://kfsoftware.app/terms/${lang}`,
         },
     };
 }
 
-export default function TermsLanguagePage({ params }: Props) {
-    if (params.lang !== "tr" && params.lang !== "en") {
+export default async function TermsLanguagePage({ params }: Props) {
+    const { lang } = await params;
+
+    if (lang !== "tr" && lang !== "en") {
         notFound();
     }
 
-    return <TermsClient initialLang={params.lang as "tr" | "en"} />;
+    return <TermsClient initialLang={lang as "tr" | "en"} />;
 }
