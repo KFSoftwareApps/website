@@ -1,5 +1,6 @@
 # Handle extensionless URLs for Next.js static export
 RewriteEngine On
+DirectoryIndex index.html
 
 # Redirect old "puntajx" URL to correct "puantajx"
 RewriteRule ^apps/puntajx/?$ /apps/puantajx/ [R=301,L]
@@ -10,5 +11,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^ %{REQUEST_URI}.html [L]
 
-# Handle dynamic routes like /terms/tr -> /terms/tr.html
-# This is already covered by the generic .html rule above if Next.js outputs terms/tr.html
+# Ensure directory requests have a trailing slash
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
