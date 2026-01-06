@@ -7,29 +7,54 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useTranslation } from "@/lib/i18n";
 
-function PrivacyContent() {
+interface PrivacyClientProps {
+  initialLang?: "tr" | "en";
+}
+
+function PrivacyContent({ initialLang }: PrivacyClientProps) {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("app") === "puantajx" ? "puantajx" : "fismatik";
   const { locale } = useTranslation();
 
-  const isEnglish = locale === "en";
+  // If initialLang is provided, it takes priority
+  const currentLang = initialLang || locale;
+  const isEnglish = currentLang === "en";
 
   return (
     <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-6 lg:px-8">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {isEnglish ? "Privacy Policy" : "Gizlilik Politikası"}
           </h1>
-          <Link href="/">
-            <Button variant="ghost">{isEnglish ? "Back to Home" : "Ana Sayfaya Dön"}</Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <div className="flex bg-gray-100 p-1 rounded-lg">
+              <Link
+                href={`/privacy/tr/?app=${activeTab}`}
+                className={cn(
+                  "px-3 py-1 text-xs font-medium rounded-md transition-colors",
+                  !isEnglish ? "bg-white text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                )}
+              >
+                TR
+              </Link>
+              <Link
+                href={`/privacy/en/?app=${activeTab}`}
+                className={cn(
+                  "px-3 py-1 text-xs font-medium rounded-md transition-colors",
+                  isEnglish ? "bg-white text-blue-600 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                )}
+              >
+                EN
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Tabs */}
         <div className="flex space-x-4 mb-8 border-b border-gray-200">
           <Link
-            href="/privacy?app=fismatik"
+            href={initialLang ? `/privacy/${initialLang}/?app=fismatik` : "/privacy?app=fismatik"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "fismatik"
@@ -40,7 +65,7 @@ function PrivacyContent() {
             FişMatik
           </Link>
           <Link
-            href="/privacy?app=puantajx"
+            href={initialLang ? `/privacy/${initialLang}/?app=puantajx` : "/privacy?app=puantajx"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "puantajx"
@@ -65,7 +90,7 @@ function PrivacyContent() {
               </div>
               <p>
                 <strong>{isEnglish ? "Last Updated:" : "Son Güncelleme:"}</strong>{" "}
-                {isEnglish ? "November 25, 2024" : "25 Kasım 2024"}
+                {isEnglish ? "January 6, 2026" : "6 Ocak 2026"}
               </p>
 
               <h3>{isEnglish ? "1. Information Collected" : "1. Toplanan Bilgiler"}</h3>
@@ -90,6 +115,12 @@ function PrivacyContent() {
                     : "Eklediğiniz harcama kayıtları, kategoriler ve tutarlar"}
                 </li>
                 <li>
+                  <strong>{isEnglish ? "Location Data:" : "Konum Bilgileri:"}</strong>{" "}
+                  {isEnglish
+                    ? "If you permit, we collect your location to show stores near you in the 'Shopping Guide' and offer regional price comparisons."
+                    : "İzin vermeniz durumunda, 'Alışveriş Rehberi' özelliğinde size en yakın mağazaları göstermek ve bölgesel fiyat karşılaştırmaları sunmak için konum bilginizi topluyoruz."}
+                </li>
+                <li>
                   <strong>{isEnglish ? "Usage data:" : "Kullanım verileri:"}</strong>{" "}
                   {isEnglish ? "In-app activities and preferences" : "Uygulama içi aktiviteler ve tercihler"}
                 </li>
@@ -105,6 +136,7 @@ function PrivacyContent() {
                 <li>{isEnglish ? "Create and manage your account" : "Hesabınızı oluşturmak ve yönetmek"}</li>
                 <li>{isEnglish ? "Provide receipt scanning and analysis services" : "Fiş tarama ve analiz hizmeti sağlamak"}</li>
                 <li>{isEnglish ? "Offer expense tracking and reporting features" : "Harcama takibi ve raporlama özellikleri sunmak"}</li>
+                <li>{isEnglish ? "Provide location-based store and price comparison (Shopping Guide)" : "Konum bazlı mağaza ve fiyat karşılaştırması sunmak (Alışveriş Rehberi)"}</li>
                 <li>{isEnglish ? "Improve and enhance the application" : "Uygulamayı geliştirmek ve iyileştirmek"}</li>
               </ul>
 
@@ -128,7 +160,7 @@ function PrivacyContent() {
                   <strong>Google AdMob:</strong> {isEnglish ? "Ad serving" : "Reklam gösterimi"}
                 </li>
                 <li>
-                  <strong>Revenue Cat:</strong> {isEnglish ? "Payment processing" : "Ödeme işlemleri"}
+                  <strong>App Store / Play Store:</strong> {isEnglish ? "Subscription and payment processing" : "Abonelik ve ödeme işlemleri"}
                 </li>
               </ul>
 
@@ -154,7 +186,7 @@ function PrivacyContent() {
                 </li>
                 <li>
                   <strong>{isEnglish ? "Right to deletion:" : "Silme hakkı:"}</strong>{" "}
-                  {isEnglish ? "You can delete your account and data" : "Hesabınızı ve verilerinizi silebilirsiniz"}
+                  {isEnglish ? "You can delete your account and data (via Profile > Delete Account)" : "Hesabınızı ve verilerinizi silebilirsiniz (Profil > Hesabı Sil)"}
                 </li>
                 <li>
                   <strong>{isEnglish ? "Right to object:" : "İtiraz hakkı:"}</strong>{" "}
@@ -278,10 +310,10 @@ function PrivacyContent() {
   );
 }
 
-export default function PrivacyClient() {
+export default function PrivacyClient({ initialLang }: PrivacyClientProps) {
   return (
-    <Suspense fallback={<div className="py-24 text-center">Loading...</div>}>
-      <PrivacyContent />
+    <Suspense fallback={<div className="py-24 text-center">Yükleniyor...</div>}>
+      <PrivacyContent initialLang={initialLang} />
     </Suspense>
   );
 }
