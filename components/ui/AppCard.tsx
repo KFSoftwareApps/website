@@ -99,36 +99,75 @@ export function AppCard({
       <div className="mt-6 flex flex-col gap-3 w-full relative z-10">
         {/* Store Buttons */}
         <div className="grid grid-cols-2 gap-3">
-          <button
-            onClick={() => alert("Mobil uygulamalarımız çok yakında App Store'da!")}
-            className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
-          >
-            <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
-              <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
-                <Lock className="w-3.5 h-3.5 text-gray-500" />
+          {storeLinks?.ios ? (
+            <a
+              href={storeLinks.ios}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer p-0 border-0 bg-transparent"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={locale === "tr" ? "/badges/app-store-tr.png" : "/badges/app-store-en.png"}
+                alt="App Store"
+                className="h-[40px] w-auto object-contain hover:brightness-110 transition-all"
+              />
+            </a>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                alert("Mobil uygulamalarımız çok yakında App Store'da!");
+              }}
+              className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
+                <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
+                  <Lock className="w-3.5 h-3.5 text-gray-500" />
+                </div>
               </div>
-            </div>
-            <img
-              src={locale === "tr" ? "/badges/app-store-tr.png" : "/badges/app-store-en.png"}
-              alt="App Store"
-              className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
-            />
-          </button>
-          <button
-            onClick={() => alert("Mobil uygulamalarımız çok yakında Google Play'de!")}
-            className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
-          >
-            <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
-              <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
-                <Lock className="w-3.5 h-3.5 text-gray-500" />
+              <img
+                src={locale === "tr" ? "/badges/app-store-tr.png" : "/badges/app-store-en.png"}
+                alt="App Store"
+                className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
+              />
+            </button>
+          )}
+
+          {storeLinks?.android ? (
+            <a
+              href={storeLinks.android}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer p-0 border-0 bg-transparent"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={locale === "tr" ? "/badges/google-play-tr.png" : "/badges/google-play-en.png"}
+                alt="Google Play"
+                className="h-[40px] w-auto object-contain hover:brightness-110 transition-all"
+              />
+            </a>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                alert("Mobil uygulamalarımız çok yakında Google Play'de!");
+              }}
+              className="relative flex justify-center transition-all hover:scale-[0.98] group/store cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-black/10 group-hover/store:bg-black/20 rounded-lg flex items-center justify-center backdrop-blur-[1px] z-20 transition-all border border-black/5">
+                <div className="bg-white/90 p-1.5 rounded-full shadow-sm">
+                  <Lock className="w-3.5 h-3.5 text-gray-500" />
+                </div>
               </div>
-            </div>
-            <img
-              src={locale === "tr" ? "/badges/google-play-tr.png" : "/badges/google-play-en.png"}
-              alt="Google Play"
-              className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
-            />
-          </button>
+              <img
+                src={locale === "tr" ? "/badges/google-play-tr.png" : "/badges/google-play-en.png"}
+                alt="Google Play"
+                className="h-[40px] w-auto object-contain opacity-80 grayscale-[0.5]"
+              />
+            </button>
+          )}
         </div>
 
         {webUrl && (

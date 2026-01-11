@@ -317,8 +317,7 @@ export const appsContent: Record<string, AppContent> = {
     },
     storeLinks: {
       web: "https://fismatik.kfsoftware.app",
-      ios: "https://apps.apple.com/tr/app/fismatik/id123456789",
-      android: "https://play.google.com/store/apps/details?id=com.kfsoftware.fismatik",
+      ios: "https://apps.apple.com/tr/app/fismatik-budget-tracker/id6757060463?l=tr",
     },
     screenshots: [
       "/apps/fismatik/screenshots/clean-screen-1.png",
