@@ -50,6 +50,7 @@
     "brandMessage": "KFSoftware develops solutions that simplify complex processes."
   },
   "product": {
+    "download": "Download",
     "downloadApp": "Download the App",
     "downloadDesc": "Get started with {name} today.",
     "downloadBeta": "Download Beta",

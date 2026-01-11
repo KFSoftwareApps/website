@@ -40,6 +40,7 @@
   "product": {
     "userExperience": "Kullanıcı Deneyimi",
     "userExperienceDesc": "Uygulamanın şık ve kullanımı kolay arayüzüne göz atın.",
+    "download": "İndir",
     "downloadApp": "Uygulamayı İndir",
     "downloadDesc": "Tercih ettiğiniz platformdan {name} uygulamasını indirin",
     "downloadBeta": "İndir (Beta)",

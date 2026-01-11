@@ -199,7 +199,7 @@ export default function ProductLayout({ content }: ProductLayoutProps) {
               >
                 <Button
                   size="lg"
-                  className={`${brandBg} text-white hover:opacity-90 shadow-2xl shadow-blue-500/20 w-full sm:w-auto px-10 h-14 rounded-2xl font-black text-lg gap-3`}
+                  className={`bg-black text-white hover:bg-gray-800 shadow-2xl shadow-gray-500/20 w-full sm:w-auto px-10 h-14 rounded-2xl font-black text-lg gap-3`}
                 >
                   <Download className="h-6 w-6" />
                   {t("product.download")}
