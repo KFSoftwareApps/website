@@ -168,8 +168,6 @@ export const appsContent: Record<string, AppContent> = {
     },
     storeLinks: {
       web: "https://puantajx.kfsoftware.app",
-      ios: "https://apps.apple.com/tr/app/puantajx/id6450634563",
-      android: "https://play.google.com/store/apps/details?id=com.kfsoftware.puantajx",
     },
     screenshots: [
       "/apps/puantajx/screenshots/1-v5.png",
