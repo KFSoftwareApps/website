@@ -147,5 +147,16 @@
     "activePosts": "Yayında",
     "draftPosts": "Taslak",
     "minRead": "dk okuma"
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Sorularınız, projeleriniz veya sadece merhaba demek için bize ulaşın.",
+    "email": "E-posta",
+    "emailDesc": "Genel sorular ve destek için:",
+    "location": "Konum",
+    "remoteFirst": "Remote-First Teknoloji Şirketi",
+    "needSupport": "Destek mi lazım?",
+    "supportDesc": "Mevcut ürünlerimizle ilgili teknik sorunlar veya yardım talepleri için destek sayfamızı kullanın. Size daha hızlı yardımcı olabiliriz.",
+    "createTicket": "Destek Talebi Oluştur"
   }
 }

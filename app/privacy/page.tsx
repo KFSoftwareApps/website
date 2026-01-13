@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Kişisel verilerinizin güvenliği bizim için önemli. KF Software olarak şeffaf ve güvenilir bir veri politikası izliyoruz.",
   alternates: {
-    canonical: "https://kfsoftware.app/privacy",
+    canonical: "https://kfsoftware.app/privacy/",
   },
 };
 

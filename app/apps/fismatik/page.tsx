@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     apple: "/apps/fismatik/logo.png",
   },
   alternates: {
-    canonical: "/apps/fismatik",
+    canonical: "https://kfsoftware.app/apps/fismatik/",
   },
 };
 

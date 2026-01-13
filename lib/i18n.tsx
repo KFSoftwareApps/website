@@ -1,4 +1,5 @@
 "use client";
+import { locales } from "./constants";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import tr from "../messages/tr.json";

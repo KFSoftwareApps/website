@@ -63,6 +63,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: post.excerpt || "",
       images: post.image_url ? [post.image_url] : [],
     },
+    alternates: {
+      canonical: `https://kfsoftware.app/blog/${slug}/`,
+    },
   };
 }
 

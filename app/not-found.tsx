@@ -53,7 +53,7 @@ export default function NotFound() {
                 Ana Sayfaya Dön
               </Button>
             </Link>
-            <Link href="/support">
+            <Link href="/support/">
               <Button variant="outline" size="lg" className="w-full sm:w-auto gap-2">
                 <MessageSquare className="h-5 w-5" />
                 Destek Al

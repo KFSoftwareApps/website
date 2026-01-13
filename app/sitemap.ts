@@ -17,16 +17,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/apps/puantajx/",
     "/apps/fismatik/",
     "/blog/",
-    "/contact/",
     "/about/",
+    "/about/tr/",
+    "/about/en/",
+    "/contact/",
+    "/contact/tr/",
+    "/contact/en/",
     "/support/",
+    "/support/tr/",
+    "/support/en/",
     "/privacy/",
+    "/privacy/tr/",
+    "/privacy/en/",
     "/terms/",
+    "/terms/tr/",
+    "/terms/en/",
+    "/account-deletion/",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1 : 0.8,
+    priority: route === "/" ? 1.0 : 0.8,
   }));
 
   // 2. Dynamic Blog Posts
@@ -40,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (posts) {
       // Use the new CSR reader structure
       blogRoutes = posts.map((post) => ({
-        url: `${baseUrl}/blog/${post.slug}`,
+        url: `${baseUrl}/blog/${post.slug}/`,
         lastModified: new Date(post.updated_at),
         changeFrequency: "weekly" as const,
         priority: 0.7,

@@ -407,7 +407,7 @@ function SupportForm() {
             <p className="text-gray-500">
               {t("support.privacyText").split("Gizlilik Politikası")[0]}
               <Link
-                href="/privacy"
+                href="/privacy/"
                 className="font-semibold text-primary-600 hover:text-primary-500 hover:underline"
               >
                 {locale === "tr" ? "Gizlilik Politikası" : "Privacy Policy"}
@@ -460,7 +460,25 @@ function SupportContent() {
   return (
     <div className="bg-gray-50 py-16 sm:py-24 min-h-screen">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center mb-12">
+        <div className="mx-auto max-w-2xl text-center mb-12 relative">
+          {/* Language Switcher */}
+          <div className="flex justify-center mb-8 gap-2">
+            <Link
+              href="/support/tr/"
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${locale === "tr" ? "bg-blue-600 text-white" : "bg-white text-gray-400 border border-gray-100"
+                }`}
+            >
+              TR
+            </Link>
+            <Link
+              href="/support/en/"
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${locale === "en" ? "bg-blue-600 text-white" : "bg-white text-gray-400 border border-gray-100"
+                }`}
+            >
+              EN
+            </Link>
+          </div>
+
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {t("support.title")}
           </h1>
@@ -523,7 +541,7 @@ function SupportContent() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/privacy"
+                    href="/privacy/"
                     className="flex items-center text-sm text-gray-600 hover:text-primary-600"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />{" "}
@@ -532,7 +550,7 @@ function SupportContent() {
                 </li>
                 <li>
                   <Link
-                    href="/terms"
+                    href="/terms/"
                     className="flex items-center text-sm text-gray-600 hover:text-primary-600"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />{" "}
@@ -572,6 +590,14 @@ function SupportContent() {
   );
 }
 
-export default function SupportClient() {
+export default function SupportClient({ initialLang }: { initialLang?: string }) {
+  const { setLocale } = useTranslation();
+
+  useEffect(() => {
+    if (initialLang && (initialLang === "tr" || initialLang === "en")) {
+      setLocale(initialLang as "tr" | "en");
+    }
+  }, [initialLang, setLocale]);
+
   return <SupportContent />;
 }

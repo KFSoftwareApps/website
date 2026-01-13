@@ -54,7 +54,7 @@ function PrivacyContent({ initialLang }: PrivacyClientProps) {
         {/* Tabs */}
         <div className="flex space-x-4 mb-8 border-b border-gray-200">
           <Link
-            href={initialLang ? `/privacy/${initialLang}/?app=fismatik` : "/privacy?app=fismatik"}
+            href={initialLang ? `/privacy/${initialLang}/?app=fismatik` : "/privacy/?app=fismatik"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "fismatik"
@@ -65,7 +65,7 @@ function PrivacyContent({ initialLang }: PrivacyClientProps) {
             FişMatik
           </Link>
           <Link
-            href={initialLang ? `/privacy/${initialLang}/?app=puantajx` : "/privacy?app=puantajx"}
+            href={initialLang ? `/privacy/${initialLang}/?app=puantajx` : "/privacy/?app=puantajx"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "puantajx"

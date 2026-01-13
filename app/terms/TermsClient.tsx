@@ -57,7 +57,7 @@ function TermsContent({ initialLang }: TermsClientProps) {
         {/* Tabs */}
         <div className="flex space-x-4 mb-8 border-b border-gray-200">
           <Link
-            href={initialLang ? `/terms/${initialLang}?app=fismatik` : "/terms?app=fismatik"}
+            href={initialLang ? `/terms/${initialLang}/?app=fismatik` : "/terms/?app=fismatik"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "fismatik"
@@ -68,7 +68,7 @@ function TermsContent({ initialLang }: TermsClientProps) {
             FişMatik
           </Link>
           <Link
-            href={initialLang ? `/terms/${initialLang}?app=puantajx` : "/terms?app=puantajx"}
+            href={initialLang ? `/terms/${initialLang}/?app=puantajx` : "/terms/?app=puantajx"}
             className={cn(
               "pb-3 text-sm font-medium border-b-2 transition-colors",
               activeTab === "puantajx"

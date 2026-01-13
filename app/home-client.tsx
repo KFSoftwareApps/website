@@ -106,7 +106,7 @@ export default function HomeClient() {
                 variants={fadeInUp}
                 className="mt-10 flex items-center justify-center gap-x-6"
               >
-                <Link href="/apps">
+                <Link href="/apps/">
                   <Button
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-700 rounded-full px-10 h-14 text-lg shadow-xl shadow-blue-500/20 hover:scale-105 transition-transform duration-300 text-white"
@@ -207,7 +207,7 @@ export default function HomeClient() {
                 <AppCard
                   name={app.name}
                   tagline={app.tagline}
-                  href={`/apps/${app.id}`}
+                  href={`/apps/${app.id}/`}
                   iconPath={`/apps/${app.id}/logo.png`}
                   chips={app.chips ? app.chips.slice(0, 3) : []}
                   targetAudience={app.targetAudience}

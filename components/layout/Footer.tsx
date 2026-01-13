@@ -50,19 +50,19 @@ export default function Footer() {
             {/* Legal Links */}
             <div className="flex gap-6">
               <Link
-                href="/privacy"
+                href="/privacy/"
                 className="text-gray-400 hover:text-gray-600 text-xs transition-colors"
               >
                 Gizlilik Politikası
               </Link>
               <Link
-                href="/terms"
+                href="/terms/"
                 className="text-gray-400 hover:text-gray-600 text-xs transition-colors"
               >
                 Kullanım Şartları
               </Link>
               <Link
-                href="/account-deletion"
+                href="/account-deletion/"
                 className="text-gray-400 hover:text-gray-600 text-xs transition-colors"
               >
                 Hesap Sil

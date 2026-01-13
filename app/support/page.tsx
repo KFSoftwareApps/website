@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "PuantajX ve FişMatik uygulamalarımızla ilgili sorunlarınızı ve önerilerinizi bize iletin. Size yardımcı olmaktan mutluluk duyarız.",
   alternates: {
-    canonical: "https://kfsoftware.app/support",
+    canonical: "https://kfsoftware.app/support/",
   },
 };
 

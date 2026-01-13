@@ -84,7 +84,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
           <div className="mx-auto max-w-4xl w-full px-6 pb-12 lg:pb-20">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <Link
-                href="/blog"
+                href="/blog/"
                 className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors text-sm font-bold bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20"
               >
                 <ChevronLeft className="h-4 w-4" /> Blog'a Dön

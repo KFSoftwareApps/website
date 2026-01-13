@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Şantiye yönetiminden kişisel finansa, işletmeniz ve hayatınız için geliştirdiğimiz tüm yazılım çözümlerini keşfedin.",
   alternates: {
-    canonical: "https://kfsoftware.app/apps",
+    canonical: "https://kfsoftware.app/apps/",
   },
 };
 

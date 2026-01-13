@@ -9,11 +9,11 @@ import { useTranslation } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { calculateReadingTime } from "@/lib/utils";
 
-export default function BlogClient() {
+export default function BlogClient({ initialPosts = [] }: { initialPosts?: any[] }) {
   const { t, locale } = useTranslation();
-  const [posts, setPosts] = useState<any[]>([]);
-  // Start with loading true only if we are fetching data
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<any[]>(initialPosts);
+  // If we have initial posts, don't show loading spinner immediately
+  const [loading, setLoading] = useState(initialPosts.length === 0);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 

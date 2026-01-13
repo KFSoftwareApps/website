@@ -22,13 +22,13 @@ export default function Navbar() {
   const { locale, setLocale, t } = useTranslation();
 
   const menuItems = [
-    { name: t("common.apps"), href: "/apps", icon: <Layout className="w-5 h-5" /> },
-    { name: t("common.support"), href: "/support", icon: <LifeBuoy className="w-5 h-5" /> },
-    { name: t("common.blog"), href: "/blog", icon: <Newspaper className="w-5 h-5" /> },
-    { name: t("common.about"), href: "/about", icon: <Info className="w-5 h-5" /> },
+    { name: t("common.apps"), href: "/apps/", icon: <Layout className="w-5 h-5" /> },
+    { name: t("common.support"), href: "/support/", icon: <LifeBuoy className="w-5 h-5" /> },
+    { name: t("common.blog"), href: "/blog/", icon: <Newspaper className="w-5 h-5" /> },
+    { name: t("common.about"), href: "/about/", icon: <Info className="w-5 h-5" /> },
     {
       name: "Test Ekibi",
-      href: "/join-test-team",
+      href: "/join-test-team/",
       icon: <UserPlus className="w-5 h-5" />,
       highlight: true,
     },
@@ -64,32 +64,32 @@ export default function Navbar() {
 
             <div className="hidden lg:flex sm:space-x-8 items-center">
               <Link
-                href="/apps"
+                href="/apps/"
                 className="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors uppercase tracking-tight"
               >
                 {t("common.apps")}
               </Link>
               <Link
-                href="/support"
+                href="/support/"
                 className="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors uppercase tracking-tight"
               >
                 {t("common.support")}
               </Link>
               <Link
-                href="/blog"
+                href="/blog/"
                 className="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors uppercase tracking-tight"
               >
                 {t("common.blog")}
               </Link>
               <Link
-                href="/about"
+                href="/about/"
                 className="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors uppercase tracking-tight"
               >
                 {t("common.about")}
               </Link>
 
               <Link
-                href="/join-test-team"
+                href="/join-test-team/"
                 className="flex items-center text-xs font-black text-white bg-gray-900 px-12 py-2.5 rounded-full hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-blue-100 uppercase tracking-widest ml-6"
               >
                 Test Ekibi
@@ -201,7 +201,7 @@ export default function Navbar() {
               </p>
               <div className="flex justify-center gap-4">
                 <Link
-                  href="/privacy"
+                  href="/privacy/"
                   onClick={toggleMenu}
                   className="text-xs font-semibold text-gray-500"
                 >
@@ -209,7 +209,7 @@ export default function Navbar() {
                 </Link>
                 <span className="text-gray-200">•</span>
                 <Link
-                  href="/terms"
+                  href="/terms/"
                   onClick={toggleMenu}
                   className="text-xs font-semibold text-gray-500"
                 >

@@ -23,7 +23,7 @@ export default function AppsClient() {
               key={app.id}
               name={app.name}
               tagline={app.tagline}
-              href={`/apps/${app.id}`}
+              href={`/apps/${app.id}/`}
               iconPath={`/apps/${app.id}/logo.png`}
               chips={app.chips}
               targetAudience={app.targetAudience}

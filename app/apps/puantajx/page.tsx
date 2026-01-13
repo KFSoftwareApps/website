@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     apple: "/apps/puantajx/logo.png",
   },
   alternates: {
-    canonical: "/apps/puantajx",
+    canonical: "https://kfsoftware.app/apps/puantajx/",
   },
 };
 

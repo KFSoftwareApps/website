@@ -1,17 +1,42 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Zap, Shield, Layout, ArrowRight, Construction } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
-export default function AboutClient() {
-  const { t, locale } = useTranslation();
+export default function AboutClient({ initialLang }: { initialLang?: string }) {
+  const { t, locale, setLocale } = useTranslation();
+
+  useEffect(() => {
+    if (initialLang && (initialLang === "tr" || initialLang === "en")) {
+      setLocale(initialLang as "tr" | "en");
+    }
+  }, [initialLang, setLocale]);
 
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Language Switcher */}
+        <div className="flex justify-end mb-8 gap-2">
+          <Link
+            href="/about/tr/"
+            className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${locale === "tr" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-400"
+              }`}
+          >
+            TR
+          </Link>
+          <Link
+            href="/about/en/"
+            className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${locale === "en" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-400"
+              }`}
+          >
+            EN
+          </Link>
+        </div>
+
         <div className="mx-auto max-w-2xl lg:text-center mb-16">
           <h2 className="text-base font-black leading-7 text-blue-600 uppercase tracking-widest">
             {t("about.whoWeAre")}
@@ -97,11 +122,11 @@ export default function AboutClient() {
                           : "Construction and personnel management."}
                       </p>
                       <div className="flex gap-3 mt-2 md:hidden">
-                        <Link href="/apps/puantajx" className="text-xs font-medium text-blue-600">
+                        <Link href="/apps/puantajx/" className="text-xs font-medium text-blue-600">
                           {t("about.review")}
                         </Link>
                         <Link
-                          href="/support?app=puantajx"
+                          href="/support/?app=puantajx"
                           className="text-xs font-medium text-gray-500"
                         >
                           {t("about.support")}
@@ -109,12 +134,12 @@ export default function AboutClient() {
                       </div>
                     </div>
                     <div className="hidden md:flex gap-2">
-                      <Link href="/support?app=puantajx">
+                      <Link href="/support/?app=puantajx">
                         <Button variant="ghost" size="sm" className="text-gray-500">
                           {t("about.support")}
                         </Button>
                       </Link>
-                      <Link href="/apps/puantajx">
+                      <Link href="/apps/puantajx/">
                         <Button variant="outline" size="sm">
                           {t("about.review")}
                         </Button>
@@ -141,11 +166,11 @@ export default function AboutClient() {
                           : "Manage your expenses with one touch."}
                       </p>
                       <div className="flex gap-3 mt-2 md:hidden">
-                        <Link href="/apps/fismatik" className="text-xs font-medium text-purple-600">
+                        <Link href="/apps/fismatik/" className="text-xs font-medium text-purple-600">
                           {t("about.review")}
                         </Link>
                         <Link
-                          href="/support?app=fismatik"
+                          href="/support/?app=fismatik"
                           className="text-xs font-medium text-gray-500"
                         >
                           {t("about.support")}
@@ -153,12 +178,12 @@ export default function AboutClient() {
                       </div>
                     </div>
                     <div className="hidden md:flex gap-2">
-                      <Link href="/support?app=fismatik">
+                      <Link href="/support/?app=fismatik">
                         <Button variant="ghost" size="sm" className="text-gray-500">
                           {t("about.support")}
                         </Button>
                       </Link>
-                      <Link href="/apps/fismatik">
+                      <Link href="/apps/fismatik/">
                         <Button variant="outline" size="sm">
                           {t("about.review")}
                         </Button>
@@ -168,7 +193,7 @@ export default function AboutClient() {
                 </div>
 
                 <div className="mt-8">
-                  <Link href="/apps">
+                  <Link href="/apps/">
                     <Button className="w-full sm:w-auto">
                       {t("about.exploreAll")} <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>

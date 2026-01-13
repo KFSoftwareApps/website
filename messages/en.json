@@ -157,5 +157,16 @@
     "activePosts": "Published",
     "draftPosts": "Draft",
     "minRead": "min read"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Reach out to us for your questions, projects, or just to say hello.",
+    "email": "Email",
+    "emailDesc": "For general inquiries and support:",
+    "location": "Location",
+    "remoteFirst": "Remote-First Technology Company",
+    "needSupport": "Need Support?",
+    "supportDesc": "Use our support page for technical issues or help requests regarding our existing products. We can help you faster.",
+    "createTicket": "Create Support Ticket"
   }
 }

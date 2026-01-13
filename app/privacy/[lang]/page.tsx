@@ -8,8 +8,10 @@ interface Props {
     }>;
 }
 
+import { locales } from "@/lib/constants";
+
 export async function generateStaticParams() {
-    return [{ lang: "tr" }, { lang: "en" }];
+    return locales.map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             ? "Privacy policy and data protection for our PuantajX and FişMatik applications."
             : "PuantajX ve FişMatik uygulamalarımızın gizlilik politikası ve veri güvenliği bilgilendirmesi.",
         alternates: {
-            canonical: `https://kfsoftware.app/privacy/${lang}`,
+            canonical: `https://kfsoftware.app/privacy/${lang}/`,
         },
     };
 }

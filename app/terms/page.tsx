@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "PuantajX ve FişMatik uygulamalarımızın kullanım koşulları ve hizmet sözleşmesi. Haklarınız ve yükümlülükleriniz hakkında bilgi edinin.",
   alternates: {
-    canonical: "https://kfsoftware.app/terms",
+    canonical: "https://kfsoftware.app/terms/",
   },
 };
 

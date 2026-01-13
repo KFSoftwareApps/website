@@ -26,7 +26,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       transition={{ delay: index * 0.1 }}
       className="group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
     >
-      <Link href={`/blog/${post.slug}`} className="relative aspect-video overflow-hidden">
+      <Link href={`/blog/${post.slug}/`} className="relative aspect-video overflow-hidden">
         {post.image ? (
           <Image
             src={post.image}
@@ -67,13 +67,13 @@ export default function BlogCard({ post, index }: BlogCardProps) {
         </div>
 
         <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}/`}>{post.title}</Link>
         </h3>
 
         <p className="text-gray-600 text-sm line-clamp-3 mb-6 flex-grow">{post.excerpt}</p>
 
         <Link
-          href={`/blog/${post.slug}`}
+          href={`/blog/${post.slug}/`}
           className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm group/link hover:gap-3 transition-all"
         >
           {t("blog.readMore")}

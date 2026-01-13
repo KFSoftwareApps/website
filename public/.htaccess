@@ -1,17 +1,36 @@
-# Handle extensionless URLs for Next.js static export
 RewriteEngine On
-DirectoryIndex index.html
+RewriteBase /
 
-# Redirect old "puntajx" URL to correct "puantajx"
-RewriteRule ^apps/puntajx/?$ /apps/puantajx/ [R=301,L]
+# 1. Force HTTPS and Non-WWW
+RewriteCond %{HTTP_HOST} ^www\.kfsoftware\.app [NC]
+RewriteRule ^(.*)$ https://kfsoftware.app/$1 [R=301,L]
 
-# Serve HTML files without the .html extension
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# 2. Redirect old/incorrect URLs to correct ones
+# Case: /blog/read/?slug=xyz -> /blog/xyz/
+RewriteCond %{QUERY_STRING} ^slug=([^&]+)
+RewriteRule ^blog/read/?$ /blog/%1/? [R=301,L]
+
+# Case: apps/puntajx... -> apps/puantajx...
+RewriteRule ^apps/puntajx(.*)$ /apps/puantajx$1 [R=301,L]
+
+# 3. Force trailing slash (Next.js config trailingSlash: true compatibility)
+# Except for files (images, css, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ $1/ [R=301,L]
+
+# 4. Handle extensionless URLs (looking for index.html in subdirectories)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^ %{REQUEST_URI}.html [L]
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.*)/?$ $1/index.html [L]
 
-# Ensure directory requests have a trailing slash
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_URI} !/$
-RewriteRule ^(.*)$ /$1/ [R=301,L]
+# 5. Fallback to index.html for SPA-like behavior (optional, but good for client-side routing)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+DirectoryIndex index.html
