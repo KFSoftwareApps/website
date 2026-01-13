@@ -33,7 +33,7 @@ export default async function ShortLinkPage({ params }: ShortLinkPageProps) {
 
     // If post not found or some error happened, we still need to return a valid page for static generation
     // though generateStaticParams should prevent this for valid codes.
-    const targetUrl = post ? `/blog/${post.slug}` : '/blog';
+    const targetUrl = post ? `/blog/${post.slug}/` : '/blog/';
     const title = post ? 'Yönlendiriliyorsunuz...' : 'Yazı Bulunamadı';
 
     return (
@@ -53,7 +53,7 @@ export default async function ShortLinkPage({ params }: ShortLinkPageProps) {
                     ) : (
                         <>
                             <p className="text-red-500 font-bold text-xl mb-4">Yazı bulunamadı!</p>
-                            <a href="/blog" className="text-blue-600 underline">Blog ana sayfasına dön</a>
+                            <a href="/blog/" className="text-blue-600 underline">Blog ana sayfasına dön</a>
                         </>
                     )}
                 </div>

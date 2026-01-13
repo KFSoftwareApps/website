@@ -42,6 +42,7 @@ export default function BlogClient({ initialPosts = [] }: { initialPosts?: any[]
             author: post.author || (locale === "tr" ? "KF Software Ekibi" : "KF Software Team"),
             image: post.image_url || "/apps/puantajx/logo.png",
             content: post.content || "",
+            language: post.language,
             rawDate: post.published_at || post.created_at,
             display_order: post.display_order || 0,
             readingTime: calculateReadingTime(post.content || ""),
@@ -84,13 +85,14 @@ export default function BlogClient({ initialPosts = [] }: { initialPosts?: any[]
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
+      const matchesLanguage = post.language === locale;
       const matchesSearch =
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      return matchesLanguage && matchesSearch && matchesCategory;
     });
-  }, [posts, searchQuery, selectedCategory]);
+  }, [posts, searchQuery, selectedCategory, locale]);
 
   if (loading) {
     return (

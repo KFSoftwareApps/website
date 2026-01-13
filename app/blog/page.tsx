@@ -38,6 +38,7 @@ export default async function BlogPage() {
         author: post.author || "KF Software Ekibi",
         image: post.image_url || "/apps/puantajx/logo.png",
         content: post.content || "",
+        language: post.language,
         rawDate: post.published_at || post.created_at,
         display_order: post.display_order || 0,
         readingTime: calculateReadingTime(post.content || ""),

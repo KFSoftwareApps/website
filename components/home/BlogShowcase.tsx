@@ -76,7 +76,7 @@ export default function BlogShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <Link key={post.id} href={`/blog/${post.slug}`} className="group">
+            <Link key={post.id} href={`/blog/${post.slug}/`} className="group">
               <article className="flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image
